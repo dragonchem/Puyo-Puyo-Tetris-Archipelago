@@ -79,12 +79,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
                     AdventureStage currStage = newState[i];
                     AdventureStage prevStage = State[i];
 
-                    // If different, must raise event
-                    if (!currStage.Equals(prevStage))
-                    {
-                        stageChanged = true;
-                    }
-
                     // Enforce stage clear status
                     if (currStage.Cleared != _desiredCleared[i])
                     {
@@ -95,8 +89,14 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
                     // Enforce star status
                     if (_desiredStars[i] != currStage.Stars)
                     {
-                        _memoryModule.SetStars(i, currStage.Stars);
+                        _memoryModule.SetStars(i, _desiredStars[i]);
                         currStage = currStage with { Stars =  _desiredStars[i] };
+                    }
+
+                    // If different, must raise event
+                    if (!currStage.Equals(prevStage))
+                    {
+                        stageChanged = true;
                     }
 
                     finalState[i] = currStage;
@@ -105,6 +105,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
             else
             {
                 finalState = newState;
+                stageChanged = true;
             }
 
             // Save the state

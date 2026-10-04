@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         // The offset from the Adventure store struct start to the actual stage table
         private const int TableOffset = 0xF0;
 
-        public AdventureMemoryModule(GameBridge game) : base(game) { }
+        public AdventureMemoryModule(GameBridge game, ILogger<AdventureMemoryModule> logger) : base(game, logger) { }
 
         /// <summary>
         /// Direct reference to the start of the stage table

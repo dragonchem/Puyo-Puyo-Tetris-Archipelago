@@ -58,12 +58,12 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
             uint newTag = rawTag;
 
             // cleared (bit 0)
-            if (stage.Cleared) rawTag |= StageMasks.Cleared;   // force bit 0 on, leave every other bit unchanged
-            else rawTag &= ~StageMasks.Cleared;  // force bit 0 off, leave every other bit unchanged
+            if (stage.Cleared) newTag |= StageMasks.Cleared;   // force bit 0 on, leave every other bit unchanged
+            else newTag &= ~StageMasks.Cleared;  // force bit 0 off, leave every other bit unchanged
 
             // stars (bit 1-2), clear first then re-set
-            rawTag &= ~StageMasks.Stars;
-            rawTag |= ((uint)stage.Stars << StageMasks.StarsShift) & StageMasks.Stars; // Shift left one to move 0-3 to bit 1-2, then reapply using AND mask
+            newTag &= ~StageMasks.Stars;
+            newTag |= ((uint)stage.Stars << StageMasks.StarsShift) & StageMasks.Stars; // Shift left one to move 0-3 to bit 1-2, then reapply using AND mask
 
             return new StageRecord { Tag = newTag, Score = stage.Score };
         }

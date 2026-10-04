@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,10 +17,12 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
     public abstract class GameMemoryModule
     {
         protected readonly GameBridge _gameBridge;
+        private readonly ILogger<GameMemoryModule> _logger;
 
-        protected GameMemoryModule(GameBridge gameBridge)
+        protected GameMemoryModule(GameBridge gameBridge, ILogger<GameMemoryModule> logger)
         {
             _gameBridge = gameBridge;
+            _logger = logger;
         }
 
         /// <summary>
@@ -89,6 +92,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
             byte[] buffer = new byte[Marshal.SizeOf<T>()];
             MemoryMarshal.Write(buffer, in value);
             Game.WriteByteArray(addr, buffer);
+
+            _logger.LogDebug($"Writing {buffer.ToString()} to {addr}");
         }
     }
 }

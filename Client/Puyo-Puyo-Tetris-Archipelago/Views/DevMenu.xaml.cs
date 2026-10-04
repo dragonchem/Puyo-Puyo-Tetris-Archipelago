@@ -20,6 +20,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
             _adventureState = adventureState;
 
             RefreshAttachedStatus();
+            RefreshAdventure();
 
             _game.OnAttach += (_, _) => RefreshAttachedStatus();
             _game.OnDetach += (_, _) => RefreshAttachedStatus();
