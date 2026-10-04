@@ -1,13 +1,5 @@
-﻿using System.Text;
+﻿using Puyo_Puyo_Tetris_Archipelago.Views;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Puyo_Puyo_Tetris_Archipelago
 {
@@ -19,6 +11,8 @@ namespace Puyo_Puyo_Tetris_Archipelago
         public MainWindow()
         {
             InitializeComponent();
+
+            ViewRoot.Children.Add(new APSetupControl());
         }
     }
 }

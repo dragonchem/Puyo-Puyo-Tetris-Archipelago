@@ -17,9 +17,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
     /// <summary>
     /// Interaction logic for Setup.xaml
     /// </summary>
-    public partial class Setup : Window
+    public partial class APSetupControl : UserControl
     {
-        public Setup()
+        public APSetupControl()
         {
             InitializeComponent();
         }

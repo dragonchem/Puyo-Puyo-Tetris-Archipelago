@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Name="ViewRoot">
 
     </Grid>
 </Window>
