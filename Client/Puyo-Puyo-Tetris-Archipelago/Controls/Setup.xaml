@@ -9,17 +9,21 @@
     mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
     Background="White"
 >
+    <!--Main grid, layout header auto, body fill-->
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
+        <!--Header grid, TODO-->
         <Grid Grid.Row="0" Name="Header" Background="LightBlue">
             <Grid Margin="5" Name="HeaderContainer">
                 <TextBlock Text="CONNECT TO ARCHIPELAGO" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
+        
+        <!--Body grid, centered stretch, content fill-->
         <Grid Name="Body" Grid.Row="1" Background="LightGreen">
             <Grid Name="BodyContainer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="20">
                 <Grid.RowDefinitions>
@@ -27,19 +31,50 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
+                <!--Scrollviewer with stackpanel, center floating, content size fill--> 
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <StackPanel Background="LightPink" Grid.Row="0" Name="InputFields" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                        <TextBlock Text="Host:" Margin="0,5"/>
-                        <TextBox Name="HostTextBox" Margin="0,5"/>
-                        <TextBlock Text="Port:" Margin="0,5"/>
-                        <TextBox Name="PortTextBox" Margin="0,5"/>
-                        <TextBlock Text="Slot:" Margin="0,5"/>
-                        <TextBox Name="SlotTextBox" Margin="0,5"/>
-                        <TextBlock Text="Password:" Margin="0,5"/>
-                        <PasswordBox Name="PasswordBox" Margin="0,5"/>
+                        
+                        <!--per input grid, inputs 3 times as wide as the label--> 
+                        <Grid Name="HostInputGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Host:" Margin="0,5"/>
+                            <TextBox Grid.Column="1" Name="HostTextBox" Margin="0,5"/>
+                        </Grid>
+
+                        <Grid Name="PortInputGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Port:" Margin="0,5"/>
+                            <TextBox Grid.Column="1" Name="PortTextBox" Margin="0,5"/>
+                        </Grid>
+                        
+                        <Grid Name="SlotInputGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Slot:" Margin="0,5"/>
+                            <TextBox Grid.Column="1" Name="SlotTextBox" Margin="0,5"/>
+                        </Grid>
+                        
+                        <Grid Name="PasswordInputGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Password:" Margin="0,5"/>
+                            <PasswordBox Grid.Column="1" Name="PasswordBox" Margin="0,5"/>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
 
+                <!--Connect button, stretch horizontally, auto height-->
                 <Button Grid.Row="1" Name="ConnectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="0,10" />
             </Grid>
         </Grid>
