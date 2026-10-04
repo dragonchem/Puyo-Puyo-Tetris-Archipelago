@@ -9,6 +9,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
     /// </summary>
     public partial class App : Application
     {
+
     }
 
 }

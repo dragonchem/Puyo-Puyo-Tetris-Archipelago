@@ -1,5 +1,6 @@
-﻿using Puyo_Puyo_Tetris_Archipelago.Views;
+﻿using Puyo_Puyo_Tetris_Archipelago.Controls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Puyo_Puyo_Tetris_Archipelago
 {
@@ -13,6 +14,23 @@ namespace Puyo_Puyo_Tetris_Archipelago
             InitializeComponent();
 
             ViewRoot.Children.Add(new APSetupControl());
+
+            Keyboard.AddKeyDownHandler(this, (sender, e) =>
+            {
+                if (e.Key == Key.F9) ShowDevMenu();
+            });
+        }
+
+        public void ShowDevMenu()
+        {
+            ViewRoot.Children.Clear();
+            ViewRoot.Children.Add(new APDevMenu());
+        }
+
+        public void ShowTracker()
+        {
+            ViewRoot.Children.Clear();
+            ViewRoot.Children.Add(new APTrackerControl());
         }
     }
 }
