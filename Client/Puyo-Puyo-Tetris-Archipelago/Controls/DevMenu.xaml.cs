@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Views
+namespace Puyo_Puyo_Tetris_Archipelago.Controls
 {
     /// <summary>
-    /// Interaction logic for Tracker.xaml
+    /// Interaction logic for DevMenu.xaml
     /// </summary>
-    public partial class Tracker : Window
+    public partial class APDevMenu : UserControl
     {
-        public Tracker()
+        public APDevMenu()
         {
             InitializeComponent();
         }

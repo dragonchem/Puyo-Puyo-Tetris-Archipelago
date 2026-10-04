@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow"
+        Height="560" Width="1120"
+    >
+    <!--MinHeight="560" MinWidth="1120">-->
+    <Grid Name="ViewRoot">
 
     </Grid>
 </Window>
