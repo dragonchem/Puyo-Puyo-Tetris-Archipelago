@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Puyo-Puyo-Tetris-Archipelago")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+539f8c125109f073724428bfa6bd4cd5af49a8b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Puyo-Puyo-Tetris-Archipelago")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Puyo-Puyo-Tetris-Archipelago")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

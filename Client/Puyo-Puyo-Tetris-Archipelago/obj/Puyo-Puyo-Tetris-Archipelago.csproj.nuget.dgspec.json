@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj": {}
+    "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Client\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj": {}
   },
   "projects": {
-    "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj": {
+    "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Client\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj",
+        "projectUniqueName": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Client\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj",
         "projectName": "Puyo-Puyo-Tetris-Archipelago",
-        "projectPath": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj",
+        "projectPath": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Client\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj",
         "packagesPath": "C:\\Users\\woutj\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\obj\\",
+        "outputPath": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Client\\Puyo-Puyo-Tetris-Archipelago\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
