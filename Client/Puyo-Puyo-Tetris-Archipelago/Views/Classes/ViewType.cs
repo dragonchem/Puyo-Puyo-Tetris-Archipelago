@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Events
+namespace Puyo_Puyo_Tetris_Archipelago.Views.Classes
 {
-    public class APEvents
+    public enum ViewType
     {
-        // TODO: register all AP events we can receive, or send
+        Setup,
+        Tracker,
+        DevMenu
     }
 }

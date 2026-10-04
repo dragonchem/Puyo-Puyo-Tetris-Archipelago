@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Controls
+namespace Puyo_Puyo_Tetris_Archipelago.Views
 {
     /// <summary>
-    /// Interaction logic for Setup.xaml
+    /// Interaction logic for Tracker.xaml
     /// </summary>
-    public partial class APSetupControl : UserControl
+    public partial class APTrackerView : UserControl
     {
-        public APSetupControl()
+        public APTrackerView()
         {
             InitializeComponent();
         }
