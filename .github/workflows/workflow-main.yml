@@ -34,6 +34,9 @@ jobs:
     - name: Restore
       run: dotnet restore $env:Solution_Name
 
+    - name: Build
+      run: dotnet build $env:Solution_Name --no-restore -c ${{ matrix.configuration }}
+
     - name: Test
       run: >
         dotnet test $env:Solution_Name --no-build -c ${{ matrix.configuration }}
@@ -42,14 +45,10 @@ jobs:
         --results-directory TestResults
 
     - name: Upload test results & coverage
-      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: TestResults
-
-    - name: Build
-      run: dotnet build $env:Solution_Name --no-restore -c ${{ matrix.configuration }}
 
     - name: Publish
       run: >
@@ -63,4 +62,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Puyo-Puyo-Tetris-Archipelago-win-x64
-        path: Puyo-Puyo-Tetris-Archipelago-win-x64.zip
+        path: publish
