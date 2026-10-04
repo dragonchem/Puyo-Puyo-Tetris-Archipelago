@@ -31,9 +31,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!--Scrollviewer with stackpanel, center floating, content size fill--> 
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Background="LightPink" Grid.Row="0" Name="InputFields" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <!--Scrollviewer with stackpanel, center floating, content size fill-->
+                <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="LightPink" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="10">
+                    <StackPanel Name="InputFields">
                         
                         <!--per input grid, inputs 3 times as wide as the label--> 
                         <Grid Name="HostInputGrid">
