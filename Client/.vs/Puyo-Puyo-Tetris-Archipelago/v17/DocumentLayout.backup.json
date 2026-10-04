@@ -1,0 +1,65 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A272D07C-AD77-4ED1-A36D-30DC665B7968}|Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj|d:\\projects 2\\puyo-puyo-tetris-archipelago\\puyo-puyo-tetris-archipelago\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A272D07C-AD77-4ED1-A36D-30DC665B7968}|Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj|solutionrelative:puyo-puyo-tetris-archipelago\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A272D07C-AD77-4ED1-A36D-30DC665B7968}|Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj|d:\\projects 2\\puyo-puyo-tetris-archipelago\\puyo-puyo-tetris-archipelago\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A272D07C-AD77-4ED1-A36D-30DC665B7968}|Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago.csproj|solutionrelative:puyo-puyo-tetris-archipelago\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml",
+              "ToolTip": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml",
+              "RelativeToolTip": "Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-04T08:54:32.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\Projects 2\\Puyo-Puyo-Tetris-Archipelago\\Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Puyo-Puyo-Tetris-Archipelago\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T08:54:32.654Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
