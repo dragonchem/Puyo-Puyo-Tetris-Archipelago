@@ -55,8 +55,10 @@ jobs:
       run: >
         dotnet publish Client\Puyo-Puyo-Tetris-Archipelago\Puyo-Puyo-Tetris-Archipelago.csproj
         -c ${{ matrix.configuration }}
+        -p:PublishSingleFile=true
+        -p:EnableCompressionInSingleFile=true
+        -p:SatelliteResourceLanguages=en
         -r win-x64 --self-contained true
-        -p:DebugType=portable -p:DebugSymbols=true
         -o publish
 
     - name: Upload build
