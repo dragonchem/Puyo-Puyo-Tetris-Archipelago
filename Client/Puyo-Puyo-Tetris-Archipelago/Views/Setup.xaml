@@ -1,11 +1,11 @@
 ﻿<UserControl 
-    x:Class="Puyo_Puyo_Tetris_Archipelago.Controls.APSetupControl"
+    x:Class="Puyo_Puyo_Tetris_Archipelago.Views.APSetupControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
-    xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
+    xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
+    xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
     mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
     Background="White"
 >

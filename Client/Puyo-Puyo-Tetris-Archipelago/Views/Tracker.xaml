@@ -1,15 +1,15 @@
-﻿<UserControl 
-    x:Class="Puyo_Puyo_Tetris_Archipelago.Controls.APDevMenu"
+﻿<UserControl
+    x:Class="Puyo_Puyo_Tetris_Archipelago.Views.APTrackerControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
-    xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
+    xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
+    xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
     mc:Ignorable="d" Height="450" Width="800"
     Background="White"
 >
     <Grid>
-        <TextBlock Text="Developer menu" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+        <TextBlock Text="Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
     </Grid>
 </UserControl>

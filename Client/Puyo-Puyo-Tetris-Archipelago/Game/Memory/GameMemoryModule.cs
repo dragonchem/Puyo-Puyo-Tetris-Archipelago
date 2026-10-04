@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Enums.Client
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
 {
-    public enum ViewType
+    public class GameMemoryModule
     {
-        Setup,
-        Tracker,
-        DevMenu
+
     }
 }

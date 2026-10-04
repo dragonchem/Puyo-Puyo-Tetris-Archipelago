@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Controls
+namespace Puyo_Puyo_Tetris_Archipelago.Views
 {
     /// <summary>
-    /// Interaction logic for DevMenu.xaml
+    /// Interaction logic for Setup.xaml
     /// </summary>
-    public partial class APDevMenu : UserControl
+    public partial class APSetupControl : UserControl
     {
-        public APDevMenu()
+        public APSetupControl()
         {
             InitializeComponent();
         }

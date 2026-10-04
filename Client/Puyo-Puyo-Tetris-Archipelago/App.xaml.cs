@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Puyo_Puyo_Tetris_Archipelago.Events;
+using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -18,14 +22,33 @@ namespace Puyo_Puyo_Tetris_Archipelago
         {
             base.OnStartup(e);
 
+            // Set log level
+#if DEBUG
+            const LogEventLevel DefaultLevel = LogEventLevel.Debug;
+#else
+            const LogEventLevel DefaultLevel = LogEventLevel.Information;
+#endif
+            LoggingLevelSwitch levelSwitch = new LoggingLevelSwitch(DefaultLevel);
+
+            // Create logger
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.ControlledBy(levelSwitch)
+                .WriteTo.Debug()
+                .CreateLogger();
+
             // List of all dependency injection services available
             ServiceCollection serviceCollection = new ServiceCollection();
 
             // All classes we want to have as singletons
-            serviceCollection.AddSingleton<ClientEvents>();
+            serviceCollection.AddSingleton<NavigationService>();
 
             // Add MainWindow as a singleton so we can use dependency injection in it, this cascades to all usercontrols
             serviceCollection.AddSingleton<MainWindow>();
+
+            serviceCollection.AddLogging(builder => {
+                builder.ClearProviders();
+                builder.AddSerilog(dispose: true);
+            });
 
             // Builds the list into actual dependency injection services
             _serviceProvider = serviceCollection.BuildServiceProvider();
