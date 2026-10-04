@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puyo-Puyo-Tetris-Archipelago", "Puyo-Puyo-Tetris-Archipelago\Puyo-Puyo-Tetris-Archipelago.csproj", "{A272D07C-AD77-4ED1-A36D-30DC665B7968}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{BE184280-22C8-4AFF-8A62-EC6319FF224C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A272D07C-AD77-4ED1-A36D-30DC665B7968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A272D07C-AD77-4ED1-A36D-30DC665B7968}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A272D07C-AD77-4ED1-A36D-30DC665B7968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE184280-22C8-4AFF-8A62-EC6319FF224C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE184280-22C8-4AFF-8A62-EC6319FF224C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE184280-22C8-4AFF-8A62-EC6319FF224C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE184280-22C8-4AFF-8A62-EC6319FF224C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
