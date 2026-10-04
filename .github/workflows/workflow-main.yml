@@ -35,7 +35,18 @@ jobs:
       run: dotnet restore $env:Solution_Name
 
     - name: Test
-      run: dotnet test $env:Solution_Name --no-build -c ${{ matrix.configuration }}
+      run: >
+        dotnet test $env:Solution_Name --no-build -c ${{ matrix.configuration }}
+        --logger "trx;LogFileName=test-results.trx"
+        --collect:"Code Coverage;Format=cobertura"
+        --results-directory TestResults
+
+    - name: Upload test results & coverage
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: TestResults
 
     - name: Build
       run: dotnet build $env:Solution_Name --no-restore -c ${{ matrix.configuration }}
@@ -47,9 +58,6 @@ jobs:
         -r win-x64 --self-contained true
         -p:DebugType=portable -p:DebugSymbols=true
         -o publish
-
-    - name: Zip
-      run: Compress-Archive -Path publish\* -DestinationPath Puyo-Puyo-Tetris-Archipelago-win-x64.zip
 
     - name: Upload build
       uses: actions/upload-artifact@v4
