@@ -43,7 +43,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
             AdventureStages.ItemsSource = _adventureState.State;
         }
 
-        private void StageClick(object sender, RoutedEventArgs e)
+        private void Stage_Click(object sender, RoutedEventArgs e)
         {
             if (_adventureState.State == null) return;
             if (((FrameworkElement)sender).DataContext is AdventureStage s)

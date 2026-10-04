@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
     xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
-    mc:Ignorable="d" Height="450" Width="800"
+    mc:Ignorable="d" MinHeight="450" MinWidth="800"
     Background="White"
 >
     <Grid>
@@ -27,7 +27,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Click="Stage_Click" MouseRightButtonUp="Stage_Rightclick">
+                        <Button Click="Stage_Click" MouseRightButtonUp="Stage_RightClick">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="LightGray"/>
