@@ -12,7 +12,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Events
     {
         public ClientEvents()
         {
-            // Register global keydown
+            // Register global keydown on all window classes
             EventManager.RegisterClassHandler(
                 typeof(Window),
                 Keyboard.KeyDownEvent,

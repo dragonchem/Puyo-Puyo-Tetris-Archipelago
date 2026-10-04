@@ -6,12 +6,42 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
     xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Controls"
-    mc:Ignorable="d" Height="450" Width="800"
+    mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
     Background="White"
 >
-    <Grid>
-        <Grid>
-            <TextBlock Text="Setup" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" Name="Header" Background="LightBlue">
+            <Grid Margin="5" Name="HeaderContainer">
+                <TextBlock Text="CONNECT TO ARCHIPELAGO" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+        <Grid Name="Body" Grid.Row="1" Background="LightGreen">
+            <Grid Name="BodyContainer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Background="LightPink" Grid.Row="0" Name="InputFields" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Host:" Margin="0,5"/>
+                        <TextBox Name="HostTextBox" Margin="0,5"/>
+                        <TextBlock Text="Port:" Margin="0,5"/>
+                        <TextBox Name="PortTextBox" Margin="0,5"/>
+                        <TextBlock Text="Slot:" Margin="0,5"/>
+                        <TextBox Name="SlotTextBox" Margin="0,5"/>
+                        <TextBlock Text="Password:" Margin="0,5"/>
+                        <PasswordBox Name="PasswordBox" Margin="0,5"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Button Grid.Row="1" Name="ConnectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="0,10" />
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
