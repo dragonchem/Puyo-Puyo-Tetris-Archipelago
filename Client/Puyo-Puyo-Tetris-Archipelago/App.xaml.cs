@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using Puyo_Puyo_Tetris_Archipelago.Interfaces;
+using Puyo_Puyo_Tetris_Archipelago.Views;
 using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
 using Serilog;
 using Serilog.Core;
@@ -41,6 +45,22 @@ namespace Puyo_Puyo_Tetris_Archipelago
 
             // All classes we want to have as singletons
             serviceCollection.AddSingleton<NavigationService>();
+            serviceCollection.AddSingleton<GameBridge>();
+            serviceCollection.AddSingleton<GameLoop>();
+
+            // Memory modules
+            serviceCollection.AddSingleton<AdventureMemoryModule>();
+
+            // State modules
+            serviceCollection.AddSingleton<AdventureState>();
+
+            // Pollables
+            serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<AdventureState>());
+
+            // Add the various usercontrols / views to the DI to make them DI aware
+            serviceCollection.AddSingleton<APDevMenu>();
+            serviceCollection.AddSingleton<APSetupView>();
+            serviceCollection.AddSingleton<APTrackerView>();
 
             // Add MainWindow as a singleton so we can use dependency injection in it, this cascades to all usercontrols
             serviceCollection.AddSingleton<MainWindow>();

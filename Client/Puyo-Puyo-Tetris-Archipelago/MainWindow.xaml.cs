@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Views;
 using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
 using System.Windows;
@@ -13,9 +14,21 @@ namespace Puyo_Puyo_Tetris_Archipelago
     {
         private readonly NavigationService _clientEvents;
         private readonly ILogger<MainWindow> _logger;
+        private readonly GameLoop _gameLoop;
+
+        private readonly APTrackerView _apTrackerView;
+        private readonly APSetupView _apSetupView;
+        private readonly APDevMenu _devMenu;
         
         // Classes in constructor are injected by dependency injection
-        public MainWindow(NavigationService clientEvents, ILogger<MainWindow> logger)
+        public MainWindow(
+            NavigationService clientEvents,
+            ILogger<MainWindow> logger,
+            GameLoop gameLoop,
+            APDevMenu apDevMenu,
+            APSetupView apSetupView,
+            APTrackerView apTrackerView
+        )
         {
             // Initializes the window for rendering
             InitializeComponent();
@@ -23,14 +36,21 @@ namespace Puyo_Puyo_Tetris_Archipelago
             // Save the injected classes to private variables
             _clientEvents = clientEvents;
             _logger = logger;
+            _gameLoop = gameLoop;
+            _apTrackerView = apTrackerView;
+            _devMenu = apDevMenu;
+            _apSetupView = apSetupView;
 
             // Show setup screen
-            ViewRoot.Children.Add(new APSetupControl());
+            ViewRoot.Children.Add(new APSetupView());
 
             // Subscribe to events
             _clientEvents.OnViewChange += OnViewChange;
 
             _logger.LogInformation("Initialized.");
+
+            // Start main game loop
+            _gameLoop.Start();
         }
 
         private void OnViewChange(object? sender, ViewType viewType)
@@ -56,19 +76,19 @@ namespace Puyo_Puyo_Tetris_Archipelago
         public void ShowSetup()
         {
             ViewRoot.Children.Clear();
-            ViewRoot.Children.Add(new APSetupControl());
+            ViewRoot.Children.Add(_apSetupView);
         }
 
         public void ShowDevMenu()
         {
             ViewRoot.Children.Clear();
-            ViewRoot.Children.Add(new APDevMenu());
+            ViewRoot.Children.Add(_devMenu);
         }
 
         public void ShowTracker()
         {
             ViewRoot.Children.Clear();
-            ViewRoot.Children.Add(new APTrackerControl());
+            ViewRoot.Children.Add(_apTrackerView);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
     /// <summary>
     /// Interaction logic for Tracker.xaml
     /// </summary>
-    public partial class APTrackerControl : UserControl
+    public partial class APTrackerView : UserControl
     {
-        public APTrackerControl()
+        public APTrackerView()
         {
             InitializeComponent();
         }

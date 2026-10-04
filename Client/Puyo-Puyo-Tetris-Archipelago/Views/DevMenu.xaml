@@ -10,6 +10,51 @@
     Background="White"
 >
     <Grid>
-        <TextBlock Text="Developer menu" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Name="AttachStatusText" Text="NOT ATTACHED" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <ItemsControl Margin="0,0,5,0" Name="AdventureStages" d:ItemsSource="{d:SampleData ItemCount=100}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="10" Columns="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="Stage_Click" MouseRightButtonUp="Stage_Rightclick">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Cleared}" Value="True">
+                                            <Setter Property="Background" Value="LightGreen" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run Text="{Binding Act}" />
+                                    <Run Text="-"/>
+                                    <Run Text="{Binding Stage}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Stars: "/>
+                                    <Run Text="{Binding Stars}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="2" Text="Left click = unlock, Right click = Cycle stars" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,20"/>
     </Grid>
 </UserControl>

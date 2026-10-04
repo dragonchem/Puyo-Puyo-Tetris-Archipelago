@@ -11,7 +11,11 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// Known non-zero location in PPT memory (based off PPT-Sandbox), used for sanity checking process memory
         /// </summary>
-        PentiminoPtr = 0x140463F20
+        PentiminoPtr = 0x140463F20,
+        /// <summary>
+        /// The start of the Adventure Mode state store (struct that contains the stage table)
+        /// </summary>
+        AdventureStore = 0x140599208,
     }
 
     // Extends StaticMemoryLocation to allow for easy conversion to IntPtr

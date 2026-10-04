@@ -94,7 +94,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         }
 
         /// <summary>
-        /// Verify the game is attached using a memory address that's never zero
+        /// Verify the game is attached using a memory address that's never zero (pentimino pointer)
         /// </summary>
         public bool VerifyAttached()
         {
