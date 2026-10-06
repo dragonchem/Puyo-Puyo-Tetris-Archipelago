@@ -18,7 +18,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         // Allows us to send cancellations
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        // Timer that ticks on WPF UI thread, so we can update ui in it's thread
+        // Timer that ticks on WPF UI thread, so we can update ui in its thread
         private DispatcherTimer? _dispatcherTimer;
 
         private bool running = false;
