@@ -37,12 +37,12 @@ namespace Puyo_Puyo_Tetris_Archipelago
             _clientEvents = clientEvents;
             _logger = logger;
             _gameLoop = gameLoop;
-            _apTrackerView = apTrackerView;
             _devMenu = apDevMenu;
             _apSetupView = apSetupView;
+            _apTrackerView = apTrackerView;
 
             // Show setup screen
-            ViewRoot.Children.Add(new APSetupView());
+            ViewRoot.Children.Add(_apSetupView);
 
             // Subscribe to events
             _clientEvents.OnViewChange += OnViewChange;
