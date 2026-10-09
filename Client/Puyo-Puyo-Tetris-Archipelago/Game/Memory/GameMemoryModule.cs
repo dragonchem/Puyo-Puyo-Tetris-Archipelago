@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// Direct reference to the attached game memory
         /// </summary>
-        protected ProcessMemory Game => _gameBridge.Game ?? throw new InvalidOperationException("Game is not attached, should not be called from module");
+        protected IProcessMemory Game => _gameBridge.Game ?? throw new InvalidOperationException("Game is not attached, should not be called from module");
 
         /// <summary>
         /// Reads the value of a pointer from the game memory at the given pointer address
@@ -43,11 +44,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <param name="baseAddress"></param>
         /// <param name="offsets"></param>
         /// <returns></returns>
-        protected IntPtr? ResolvePointers(IntPtr baseAddress, params int[] offsets)
+        protected IntPtr ResolvePointers(IntPtr baseAddress, params int[] offsets)
         {
-            nint result;
-            Game.Traverse(baseAddress, offsets, out result);
-            return result;
+            return Game.Traverse(baseAddress, offsets);
         }
 
         /// <summary>
