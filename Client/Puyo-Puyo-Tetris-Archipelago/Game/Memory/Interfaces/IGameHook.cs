@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces
         /// <summary>
         /// The address the hook lives at
         /// </summary>
-        IntPtr Address { get; }
+        IntPtr HookAddress { get; }
 
         /// <summary>
         /// Is the game and function ready to attach the hook?

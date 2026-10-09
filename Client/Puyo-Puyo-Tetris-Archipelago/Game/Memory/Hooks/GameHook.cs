@@ -7,7 +7,7 @@ using System.Printing.IndexedProperties;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
 {
     /// <summary>
     /// Class to write hooks into the game, hooks are used for adding custom code into the game, or trigger 
@@ -20,7 +20,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// The original bytes in the game before we make any modifications
         /// </summary>
-        protected readonly byte[]? _originalBytes;
+        protected byte[]? _originalBytes;
 
         /// <summary>
         /// Set to true if the hook has been set, should be validated to see if still correct, use only to see if arm was even ran
@@ -30,7 +30,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// Length of the hook in memory
         /// </summary>
-        protected uint Length;
+        protected uint HookLength;
 
         /// <summary>
         /// Hook's name
@@ -40,14 +40,14 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// Address of the hook
         /// </summary>
-        public IntPtr Address { get; protected set; }
+        public nint HookAddress { get; protected set; }
 
-        protected GameHook(string name, IntPtr address, IProcessMemory game, ILogger logger)
+        protected GameHook(string name, nint address, IProcessMemory game, ILogger logger)
         {
             _game = game;
             _logger = logger;
             Name = name;
-            Address = address;
+            HookAddress = address;
         }
 
         public bool IsReady()
@@ -82,7 +82,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <returns></returns>
         protected byte[] ReadHookLocation()
         {
-            return _game.ReadByteArray(Address, Length);
+            return _game.ReadByteArray(HookAddress, HookLength);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
             if (IsArmed())
             {
                 _logger.LogError($"Hook {Name} already armed.");
-                throw new InvalidOperationException($"Hook {Name} already armed at {Address}.");
+                throw new InvalidOperationException($"Hook {Name} already armed at {HookAddress}.");
             }
 
             // If not ready, don't arm
@@ -124,7 +124,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
 
             // Set state and return
             CurrentlyArmed = true;
-            _logger.LogInformation($"Hook {Name} succesfully armed at ${Address}.");
+            _logger.LogInformation($"Hook {Name} succesfully armed at ${HookAddress}.");
             return true;
         }
 
@@ -164,10 +164,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         }
 
         // abstract functions the child classes need to implement
-        public abstract void FreeHook();
-        public abstract void DisarmHook();
-        public abstract void ArmHook();
         public abstract bool IsArmed();
         public abstract void FindOriginalBytes();
+        protected abstract void FreeHook();
+        protected abstract void DisarmHook();
+        protected abstract void ArmHook();
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
 {
     /// <summary>
     /// The current state of a game function hook
