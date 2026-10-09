@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
 {
     public class AdventureMemoryModule : GameMemoryModule
     {
@@ -19,7 +19,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         /// <summary>
         /// Direct reference to the start of the stage table
         /// </summary>
-        private static IntPtr TableBase =>
+        private static nint TableBase =>
             StaticMemoryLocation.AdventureStore.Ptr() + TableOffset;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        private static IntPtr RecordAddr(int i) =>
+        private static nint RecordAddr(int i) =>
             TableBase + i * Unsafe.SizeOf<StageRecord>();
 
         public AdventureStage[] Read()
@@ -49,7 +49,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         public void SetCleared(int index, bool cleared)
         {
             // Decode the live stage and write back through encoder
-            IntPtr address = RecordAddr(index);
+            nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { Cleared = cleared });
         }
@@ -62,7 +62,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         public void SetStars(int index, int stars)
         {
             // Decode the live stage and write back through encoder
-            IntPtr address = RecordAddr(index);
+            nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { Stars = stars });
         }
@@ -70,7 +70,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         public void Write(int index, AdventureStage stage)
         {
             // Get stage address
-            IntPtr address = RecordAddr(index);
+            nint address = RecordAddr(index);
 
             // Get the existing stage record so we can keep the live Tag for the unknown bits
             StageRecord existing = ReadStruct<StageRecord>(address);
