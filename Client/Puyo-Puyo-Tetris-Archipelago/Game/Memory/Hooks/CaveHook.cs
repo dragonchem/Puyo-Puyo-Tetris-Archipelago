@@ -41,7 +41,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
             // instruction is exactly: jmp addr (direct near jump)
             return decodedFunc.Mnemonic == Mnemonic.Jmp
                 && decodedFunc.Op0Kind == OpKind.NearBranch64
-                && decodedFunc.NearBranchTarget == (ulong)HookAddress.ToInt64();
+                && decodedFunc.NearBranchTarget == (ulong)CaveAddress.ToInt64();
         }
 
         protected override void ArmHook()
@@ -63,6 +63,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
             _game.WriteByteArray(HookAddress, BuildDetour());
         }
 
+        protected override void FreeHook()
+        {
+            if (CaveAddress == nint.Zero) return;
+            _game.FreeMemory(CaveAddress, CaveLength);
+            CaveAddress = nint.Zero;
+        }
+
         /// <summary>
         /// Builds the jump instruction that redirects to the cave
         /// </summary>
@@ -71,7 +78,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
             int padding = (int)HookLength - MinimalDetourLength;
 
             // Create instruction at hookAddress
-            Instruction[] detourInstructions = new Instruction[HookLength];
+            Instruction[] detourInstructions = new Instruction[1 + padding];
 
             // Jumps to cave
             detourInstructions[0] = Instruction.CreateBranch(Code.Jmp_rel32_64, (ulong)CaveAddress);

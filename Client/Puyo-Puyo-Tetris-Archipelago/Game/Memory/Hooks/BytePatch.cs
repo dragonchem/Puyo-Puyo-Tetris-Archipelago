@@ -43,24 +43,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
         }
 
         /// <summary>
-        /// Clear the hook (if known)
-        /// </summary>
-        protected override void DisarmHook()
-        {
-            if (_originalBytes == null || _game == null) return;
-            _game.WriteByteArray(HookAddress, _originalBytes);
-        }
-
-        /// <summary>
-        /// Only call at initialization of hook, re-calling rewrites the hook
-        /// TODO: harden to make sure it's vanilla code before writing _originalBytes
-        /// </summary>
-        public override void FindOriginalBytes()
-        {
-            _originalBytes = ReadHookLocation();
-        }
-
-        /// <summary>
         /// The actual patch itself, set in child class
         /// </summary>
         /// <param name="address"></param>

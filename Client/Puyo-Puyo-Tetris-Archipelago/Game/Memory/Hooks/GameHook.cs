@@ -163,11 +163,25 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
             FreeHook();
         }
 
+        /// <summary>
+        /// Only call at initialization of hook, re-calling rewrites the hook
+        /// TODO: harden to make sure it's vanilla code before writing _originalBytes
+        /// </summary>
+        public virtual void FindOriginalBytes()
+        {
+            _originalBytes = ReadHookLocation();
+        }
+
+
+        protected virtual void DisarmHook()
+        {
+            if (_originalBytes == null) return;
+            _game.WriteByteArray(HookAddress, _originalBytes);
+        }
+
         // abstract functions the child classes need to implement
         public abstract bool IsArmed();
-        public abstract void FindOriginalBytes();
-        protected abstract void FreeHook();
-        protected abstract void DisarmHook();
+        protected virtual void FreeHook() { }
         protected abstract void ArmHook();
     }
 }
