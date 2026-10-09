@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
 {
     internal static class StageMasks
     {
@@ -35,8 +35,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         /// <param name="raw"></param>
         /// <returns></returns>
         public static AdventureStage Decode(int i, StageRecord raw) => new AdventureStage(
-            Act: (i / 10) + 1,
-            Stage: (i % 10) + 1,
+            Act: i / 10 + 1,
+            Stage: i % 10 + 1,
             Cleared: (raw.Tag & StageMasks.Cleared) != 0,
             Stars: (int)(raw.Tag & StageMasks.Stars) >> StageMasks.StarsShift,
             Visited: (raw.Tag & StageMasks.Visited) != 0,
@@ -63,7 +63,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 
             // stars (bit 1-2), clear first then re-set
             newTag &= ~StageMasks.Stars;
-            newTag |= ((uint)stage.Stars << StageMasks.StarsShift) & StageMasks.Stars; // Shift left one to move 0-3 to bit 1-2, then reapply using AND mask
+            newTag |= (uint)stage.Stars << StageMasks.StarsShift & StageMasks.Stars; // Shift left one to move 0-3 to bit 1-2, then reapply using AND mask
 
             return new StageRecord { Tag = newTag, Score = stage.Score };
         }

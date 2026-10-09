@@ -6,7 +6,7 @@ using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
 {
     public class AdventureState : IPollable
     {

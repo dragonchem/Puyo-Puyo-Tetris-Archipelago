@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Puyo_Puyo_Tetris_Archipelago.Game;
-using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Views;
 using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
