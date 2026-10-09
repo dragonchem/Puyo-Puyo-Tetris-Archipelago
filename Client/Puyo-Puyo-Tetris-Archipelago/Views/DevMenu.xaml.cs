@@ -1,5 +1,5 @@
 ﻿using Puyo_Puyo_Tetris_Archipelago.Game;
-using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

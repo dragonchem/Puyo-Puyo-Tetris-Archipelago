@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +16,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         // The process name to target
         public const string ProcessName = "puyopuyotetris";
         // Reference to the game
-        public ProcessMemory? Game { get; private set; }
+        public IProcessMemory? Game { get; private set; }
         // Is the game currently attached
         public bool Attached { get; private set; } = false;
         // Game installation directory
@@ -111,7 +112,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
             using Process? gameProcess = Process.GetProcessesByName(ProcessName).FirstOrDefault();
             if (gameProcess == null) return;
 
-            Game = new ProcessMemory(ProcessName, false);
+            Game = new GameProcessMemory(ProcessName, false);
             if (!VerifyAttached())
             {
                 Game = null; // process exists but isn't the build we expect (or isn't ready yet)
