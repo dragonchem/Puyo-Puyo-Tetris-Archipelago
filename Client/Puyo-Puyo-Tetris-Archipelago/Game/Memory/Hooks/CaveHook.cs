@@ -66,7 +66,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
         protected override void FreeHook()
         {
             if (CaveAddress == nint.Zero) return;
-            _game.FreeMemory(CaveAddress, CaveLength);
+            _game.FreeMemory(CaveAddress);
             CaveAddress = nint.Zero;
         }
 

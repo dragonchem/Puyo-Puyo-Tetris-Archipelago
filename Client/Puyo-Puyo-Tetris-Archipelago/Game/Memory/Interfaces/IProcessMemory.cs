@@ -51,6 +51,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces
         /// </summary>
         /// <param name="target"></param>
         /// <param name="size"></param>
-        void FreeMemory(IntPtr target, int size);
+        void FreeMemory(IntPtr target);
     }
 }
