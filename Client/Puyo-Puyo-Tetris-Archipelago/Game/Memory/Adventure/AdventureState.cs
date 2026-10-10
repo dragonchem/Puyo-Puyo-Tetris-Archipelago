@@ -36,6 +36,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
 
             // 1-1 always unlocked
             _desiredUnlocked[0] = true;
+
+            _game.OnAttach += OnAttach;
+        }
+
+        private void OnAttach(object? sender, EventArgs e)
+        {
+            _memoryModule.SetCursorIndex(0);
         }
 
         /// <summary>

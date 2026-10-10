@@ -91,5 +91,14 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             StageRecord record = AdventureEncode.Encode(stage, existing.Tag);
             WriteStruct(address, in record);
         }
+
+        /// <summary>
+        /// Set the cursor position to [index], does not auto update uiw
+        /// </summary>
+        /// <param name="index"></param>
+        public void SetCursorIndex(ushort index)
+        {
+            WriteStruct(StaticMemoryLocation.AdventureModeCursorGlobal.Ptr(), index);
+        }
     }
 }
