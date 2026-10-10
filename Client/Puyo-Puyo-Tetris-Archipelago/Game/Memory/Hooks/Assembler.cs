@@ -28,6 +28,24 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
         }
 
         /// <summary>
+        /// Turn a list of instructions into a byte array, and label it
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="instructions"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static byte[] AssembleCave(nint address, Iced.Intel.Assembler assembler)
+        {
+            // Initialize writer
+            ByteListCodeWriter writer = new ByteListCodeWriter();
+
+            // assembler contains all the instructions for the cave hook
+            assembler.Assemble(writer, (ulong)address);
+            return writer.bytes.ToArray();
+        }
+
+        /// <summary>
         /// Iced doesn't have a default byte list writer for some reason? so this wrapper is needed
         /// </summary>
         private sealed class ByteListCodeWriter : CodeWriter

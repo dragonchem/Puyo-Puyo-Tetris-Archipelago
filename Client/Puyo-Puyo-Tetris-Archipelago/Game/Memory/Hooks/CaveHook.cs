@@ -50,7 +50,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
             if (CaveAddress == nint.Zero) CaveAddress = _game.AllocNear(HookAddress, CaveLength);
 
             // Build cave
-            byte[] newInstructions = Assembler.Assemble(CaveAddress, BuildCave(CaveAddress));
+            Iced.Intel.Assembler assembler = new Iced.Intel.Assembler(64);
+            BuildCave(assembler);
+            byte[] newInstructions = Assembler.AssembleCave(CaveAddress, assembler);
 
             // Validate cave
             if (newInstructions == null || newInstructions.Length == 0) throw new InvalidOperationException("Cave zero or null");
@@ -99,8 +101,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
         /// <summary>
         /// Return the actual assembly instructions for the cave
         /// </summary>
-        /// <param name="caveBase"></param>f
-        /// <returns></returns>fi
-        protected abstract Instruction[] BuildCave(nint caveBase);
+        protected abstract void BuildCave(Iced.Intel.Assembler assembler);
     }
 }
