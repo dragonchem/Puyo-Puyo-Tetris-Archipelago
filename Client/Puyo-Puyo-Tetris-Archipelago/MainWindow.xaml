@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="560" Width="1120"
+        Icon="./Resources/icon.ico"
     >
     <!--MinHeight="560" MinWidth="1120">-->
     <Grid Name="ViewRoot">
