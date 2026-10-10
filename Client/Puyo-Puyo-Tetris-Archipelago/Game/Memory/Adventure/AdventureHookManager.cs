@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Adventure;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
 using System;
@@ -17,7 +18,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         private readonly GameBridge _game;
         private readonly ILogger<AdventureHookManager> _logger;
         private List<IGameHook>? _hooks = null;
-        public AdventureHookManager(GameBridge game, Logger<AdventureHookManager> logger)
+        public AdventureHookManager(GameBridge game, ILogger<AdventureHookManager> logger)
         {
             _game = game;
             _logger = logger;
@@ -26,9 +27,38 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         public void Poll()
         {
             // Check that game is attached
-            if (_game.Attached || _game.Game == null) return;
+            if (!_game.Attached || _game.Game == null)
+            {
+                DestroyAll();
+                return;
+            }
 
-            _hooks = BuildHooks();
+            if (_hooks == null) _hooks = BuildHooks();
+
+            foreach (IGameHook hook in _hooks)
+            {
+                ProgressHook(hook);
+            }
+        }
+
+        private void ProgressHook(IGameHook hook)
+        {
+            switch (hook.GetState())
+            {
+                case Hooks.HookState.Unknown:
+                    hook.FindOriginalBytes();
+                    break;
+                case Hooks.HookState.Ready:
+                    hook.Arm();
+                    break;
+                case Hooks.HookState.Degraded:
+                    hook.Disarm();
+                    break;
+                case Hooks.HookState.Armed:
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public void DestroyAll()
@@ -39,13 +69,15 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
                 hook.Disarm();
                 hook.Free();
             }
+            _hooks = null;
         }
 
         private List<IGameHook> BuildHooks()
         {
+            if (_game.Game == null) throw new InvalidOperationException("Can't build hooks when game is not attached");
             return new List<IGameHook>()
             {
-                
+                new NavigateRightHook(_game.Game, _logger)
             };
         }
     }

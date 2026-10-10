@@ -32,7 +32,7 @@
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="LightGray"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Cleared}" Value="True">
+                                        <DataTrigger Binding="{Binding ApUnlocked}" Value="True">
                                             <Setter Property="Background" Value="LightGreen" />
                                         </DataTrigger>
                                     </Style.Triggers>

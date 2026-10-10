@@ -17,7 +17,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         /// <summary>
         /// The actual list of stages that should be unlocked at this state
         /// </summary>
-        private bool[] _desiredCleared = new bool[AdventureMemoryModule.StageCount];
+        private bool[] _desiredUnlocked = new bool[AdventureMemoryModule.StageCount];
 
         /// <summary>
         /// The desired list of stars, should be kept up to date, only used to restore stars in case of a restart
@@ -33,6 +33,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         {
             _memoryModule = mem;
             _game = game;
+
+            // 1-1 always unlocked
+            _desiredUnlocked[0] = true;
         }
 
         /// <summary>
@@ -40,9 +43,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         /// </summary>
         /// <param name="index"></param>
         /// <param name="cleared"></param>
-        public void SetDesiredCleared(int index, bool cleared)
+        public void SetDesiredUnlocked(int index, bool cleared)
         {
-            _desiredCleared[index] = cleared;
+            _desiredUnlocked[index] = cleared;
         }
 
         public void SetDesiredStars(int index, int stars)
@@ -80,10 +83,17 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
                     AdventureStage prevStage = State[i];
 
                     // Enforce stage clear status
-                    if (currStage.Cleared != _desiredCleared[i])
+                    if (currStage.GameCleared != true)
                     {
-                        _memoryModule.SetCleared(i, _desiredCleared[i]);
-                        currStage = currStage with { Cleared = _desiredCleared[i] };
+                        _memoryModule.SetGameCleared(i);
+                        currStage = currStage with { GameCleared = true };
+                    }
+
+                    // Enforce stage unlocked status
+                    if (currStage.ApUnlocked != _desiredUnlocked[i])
+                    {
+                        _memoryModule.SetApUnlocked(i, _desiredUnlocked[i]);
+                        currStage = currStage with { ApUnlocked = _desiredUnlocked[i] };
                     }
 
                     // Enforce star status

@@ -45,13 +45,25 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         /// Changes the cleared state of a stage to the desired value
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="unlocked"></param>
-        public void SetCleared(int index, bool cleared)
+        public void SetGameCleared(int index)
         {
             // Decode the live stage and write back through encoder
             nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
-            Write(index, stage with { Cleared = cleared });
+            Write(index, stage with { GameCleared = true });
+        }
+
+        /// <summary>
+        /// Changes the unlocked state of a stage to the desired value
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="unlocked"></param>
+        public void SetApUnlocked(int index, bool unlocked)
+        {
+            // Decode the live stage and write back through encoder
+            nint address = RecordAddr(index);
+            AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
+            Write(index, stage with { ApUnlocked = unlocked });
         }
 
         /// <summary>
