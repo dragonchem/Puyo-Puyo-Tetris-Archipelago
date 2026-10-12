@@ -77,7 +77,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
             if (_game.Game == null) throw new InvalidOperationException("Can't build hooks when game is not attached");
             return new List<IGameHook>()
             {
-                new NavigateRightHook(_game.Game, _logger)
+                new NavigateRightHook(_game.Game, _logger),
+                new NavigateLeftHook(_game.Game, _logger)
             };
         }
     }
