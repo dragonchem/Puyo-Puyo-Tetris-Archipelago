@@ -2,9 +2,9 @@ name: .NET Core Desktop
 
 on:
   push:
-    branches: [ "canary" ]
+    branches: [ "beta" ]
   pull_request:
-    branches: [ "canary" ]
+    branches: [ "beta" ]
 
 jobs:
 
