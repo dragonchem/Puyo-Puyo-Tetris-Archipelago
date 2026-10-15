@@ -9,7 +9,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
 {
     internal static class StageMasks
     {
-        public const uint Cleared = 0b1; // bit 0 = 0000 0001 -> stage cleared
+        public const uint GameCleared = 0b1; // bit 0 = 0000 0001 -> stage cleared
+        public const uint ApUnlocked = 1u << 31; // bit 31 -> ap stage unlocked
         public const uint Stars = 0b11u << 1; // bits 1-2 = 0000 0110 -> star count (0-3)
         public const int StarsShift = 1; // bits 1-2 start at bit 1 -> shift right one to read/write the value
         public const uint Visited = 0b1u << 8; // bit 8 = 1 0000 0000 -> stage visited
@@ -24,7 +25,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
     /// <param name="Stars"></param>
     /// <param name="Visited"></param>
     /// <param name="Score"></param>
-    public readonly record struct AdventureStage(int Act, int Stage, bool Cleared, int Stars, bool Visited, uint Score);
+    public readonly record struct AdventureStage(int Act, int Stage, bool GameCleared, bool ApUnlocked, int Stars, bool Visited, uint Score);
 
     internal static class AdventureDecode
     {
@@ -37,9 +38,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         public static AdventureStage Decode(int i, StageRecord raw) => new AdventureStage(
             Act: i / 10 + 1,
             Stage: i % 10 + 1,
-            Cleared: (raw.Tag & StageMasks.Cleared) != 0,
+            GameCleared: (raw.Tag & StageMasks.GameCleared) != 0,
             Stars: (int)(raw.Tag & StageMasks.Stars) >> StageMasks.StarsShift,
             Visited: (raw.Tag & StageMasks.Visited) != 0,
+            ApUnlocked: (raw.Tag & StageMasks.ApUnlocked) != 0,
             Score: raw.Score
         );
     }
@@ -57,9 +59,11 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             // Copy rawTag values into new uint for manipulation
             uint newTag = rawTag;
 
-            // cleared (bit 0)
-            if (stage.Cleared) newTag |= StageMasks.Cleared;   // force bit 0 on, leave every other bit unchanged
-            else newTag &= ~StageMasks.Cleared;  // force bit 0 off, leave every other bit unchanged
+            newTag |= StageMasks.GameCleared; // force cleared to 1 at all times
+
+            // ap unlocked (bit 31)
+            if (stage.ApUnlocked) newTag |= StageMasks.ApUnlocked; // force bit 31 on, leave every other bit unchanged
+            else newTag &= ~StageMasks.ApUnlocked; // force bit 31 off, leave every other bit unchanged
 
             // stars (bit 1-2), clear first then re-set
             newTag &= ~StageMasks.Stars;

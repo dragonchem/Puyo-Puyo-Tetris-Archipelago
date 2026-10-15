@@ -16,6 +16,14 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// The start of the Adventure Mode state store (struct that contains the stage table)
         /// </summary>
         AdventureStore = 0x140599208,
+        /// <summary>
+        /// Adventure mode cursor index
+        /// </summary>
+        AdventureModeCursorGlobal = 0x140598ED0,
+        /// <summary>
+        /// The start of the actual level data table per level
+        /// </summary>
+        AdventureModeTagTable = 0x1405992F8
     }
 
     // Extends StaticMemoryLocation to allow for easy conversion to IntPtr

@@ -50,7 +50,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
             if (((FrameworkElement)sender).DataContext is AdventureStage s)
             {
                 int index = (s.Act - 1) * 10 + (s.Stage - 1);
-                _adventureState.SetDesiredCleared(index, !_adventureState.State[index].Cleared);
+                _adventureState.SetDesiredUnlocked(index, !_adventureState.State[index].ApUnlocked);
             }
         }
 
