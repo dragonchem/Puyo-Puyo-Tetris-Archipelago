@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Adventure;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
 using System;
@@ -75,9 +76,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
         /// The per-frame list. Add a detour-less <see cref="CodeCave"/> here to run new logic each frame, nothing
         /// else. Empty for now.
         /// </summary>
-        private List<CodeCave> BuildFrameHooks(IProcessMemory game) => new()
+        private List<CodeCave> BuildFrameHooks(IProcessMemory game, ILogger logger) => new()
         {
-            // new FrameHook();
+            new ActivateMapRefreshHook(game, logger)
         };
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
         {
             IProcessMemory g = _game.Game ?? throw new InvalidOperationException("Can't build hooks when game is not attached");
 
-            _frameHooks = BuildFrameHooks(g);
+            _frameHooks = BuildFrameHooks(g, _logger);
 
             if (_frameHooks.Count == 0) return new List<IGameHook>();
 

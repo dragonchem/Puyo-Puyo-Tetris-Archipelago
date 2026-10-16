@@ -72,7 +72,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { ApUnlocked = unlocked });
             RefreshMap();
-            _logger.LogDebug("Refreshing map");
         }
 
         /// <summary>
@@ -86,6 +85,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { Stars = stars });
+            RefreshMap();
         }
 
         public void Write(int index, AdventureStage stage)
