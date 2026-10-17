@@ -1,41 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow will build, test, sign and package a WPF or Windows Forms desktop application
-# built on .NET Core.
-# To learn how to migrate your existing application to .NET Core,
-# refer to https://docs.microsoft.com/en-us/dotnet/desktop-wpf/migration/convert-project-from-net-framework
-#
-# To configure this workflow:
-#
-# 1. Configure environment variables
-# GitHub sets default environment variables for every workflow run.
-# Replace the variables relative to your project in the "env" section below.
-#
-# 2. Signing
-# Generate a signing certificate in the Windows Application
-# Packaging Project or add an existing signing certificate to the project.
-# Next, use PowerShell to encode the .pfx file using Base64 encoding
-# by running the following Powershell script to generate the output string:
-#
-# $pfx_cert = Get-Content '.\SigningCertificate.pfx' -Encoding Byte
-# [System.Convert]::ToBase64String($pfx_cert) | Out-File 'SigningCertificate_Encoded.txt'
-#
-# Open the output file, SigningCertificate_Encoded.txt, and copy the
-# string inside. Then, add the string to the repo as a GitHub secret
-# and name it "Base64_Encoded_Pfx."
-# For more information on how to configure your signing certificate for
-# this workflow, refer to https://github.com/microsoft/github-actions-for-desktop-apps#signing
-#
-# Finally, add the signing certificate password to the repo as a secret and name it "Pfx_Key".
-# See "Build the Windows Application Packaging project" below to see how the secret is used.
-#
-# For more information on GitHub Actions, refer to https://github.com/features/actions
-# For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
-# refer to https://github.com/microsoft/github-actions-for-desktop-apps
-
 name: .NET Core Desktop
 
 on:
@@ -52,7 +14,11 @@ jobs:
       matrix:
         configuration: [Debug]
 
-    runs-on: windows-latest 
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+      checks: write
 
     env:
       Solution_Name: Client\Puyo-Puyo-Tetris-Archipelago.sln
@@ -79,15 +45,43 @@ jobs:
       run: >
         dotnet test $env:Solution_Name --no-build -c ${{ matrix.configuration }}
         --logger "trx;LogFileName=test-results.trx"
-        --collect:"Code Coverage;Format=cobertura"
+        --collect:"XPlat Code Coverage"
         --results-directory TestResults
 
-    - name: Upload test results & coverage
+    - name: Coverage report
+      if: always()
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+      with:
+        reports: 'TestResults/**/*.cobertura.xml'
+        targetdir: 'coverage-tmp'
+        reporttypes: 'MarkdownSummaryGithub'
+
+    - name: Coverage summary to run page
+      if: always()
+      shell: pwsh
+      run: Get-Content coverage-tmp\SummaryGithub.md | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+
+    - name: Test report
+      if: always()
+      uses: dorny/test-reporter@v2
+      with:
+        name: Test results
+        path: 'TestResults/**/*.trx'
+        reporter: dotnet-trx
+
+    - name: Upload code-coverage (raw)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage
+        path: TestResults/**/*.cobertura.xml
+
+    - name: Upload test-results (raw)
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: TestResults
+        path: TestResults/**/*.trx
 
     - name: Publish
       run: >
