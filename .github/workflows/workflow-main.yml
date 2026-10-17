@@ -14,7 +14,11 @@ jobs:
       matrix:
         configuration: [Release]
 
-    runs-on: windows-latest 
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+      checks: write
 
     env:
       Solution_Name: Client\Puyo-Puyo-Tetris-Archipelago.sln
@@ -41,24 +45,53 @@ jobs:
       run: >
         dotnet test $env:Solution_Name --no-build -c ${{ matrix.configuration }}
         --logger "trx;LogFileName=test-results.trx"
-        --collect:"Code Coverage;Format=cobertura"
+        --collect:"XPlat Code Coverage"
         --results-directory TestResults
 
-    - name: Upload test results & coverage
+    - name: Coverage report
+      if: always()
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+      with:
+        reports: 'TestResults/**/*.cobertura.xml'
+        targetdir: 'coverage-tmp'
+        reporttypes: 'MarkdownSummaryGithub'
+
+    - name: Coverage summary to run page
+      if: always()
+      shell: pwsh
+      run: Get-Content coverage-tmp\SummaryGithub.md | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+
+    - name: Test report
+      if: always()
+      uses: dorny/test-reporter@v2
+      with:
+        name: Test results
+        path: 'TestResults/**/*.trx'
+        reporter: dotnet-trx
+
+    - name: Upload code-coverage (raw)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage
+        path: TestResults/**/*.cobertura.xml
+
+    - name: Upload test-results (raw)
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: TestResults
+        path: TestResults/**/*.trx
 
     - name: Publish
       run: >
         dotnet publish Client\Puyo-Puyo-Tetris-Archipelago\Puyo-Puyo-Tetris-Archipelago.csproj
         -c ${{ matrix.configuration }}
-        -p:PublishSingleFile=true
-        -p:EnableCompressionInSingleFile=true
-        -p:SatelliteResourceLanguages=en
         -r win-x64 --self-contained true
+        -p:EnableCompressionInSingleFile=true
+        -p:PublishSingleFile=true
+        -p:DebugType=portable -p:DebugSymbols=true
+        -p:SatelliteResourceLanguages=en
         -o publish
 
     - name: Upload build
