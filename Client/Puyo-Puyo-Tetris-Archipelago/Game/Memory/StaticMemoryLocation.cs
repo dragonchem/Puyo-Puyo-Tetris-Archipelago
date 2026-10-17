@@ -23,7 +23,15 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
         /// <summary>
         /// The start of the actual level data table per level
         /// </summary>
-        AdventureModeTagTable = 0x1405992F8
+        AdventureModeTagTable = 0x1405992F8,
+        /// <summary>
+        /// Pointer to the live AdventureMode instance
+        /// </summary>
+        AdventureModeInstanceGlobal = 0x1405989B0,
+        /// <summary>
+        /// Current gamemode id (mapped to GameMode enum)
+        /// </summary>
+        CurrentModeGlobal = 0x140598BB0,
     }
 
     // Extends StaticMemoryLocation to allow for easy conversion to IntPtr

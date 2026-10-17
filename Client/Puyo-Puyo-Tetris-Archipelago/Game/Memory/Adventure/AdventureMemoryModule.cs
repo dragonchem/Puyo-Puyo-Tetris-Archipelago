@@ -6,15 +6,22 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 {
     public class AdventureMemoryModule : GameMemoryModule
     {
         public const int StageCount = 100;
         // The offset from the Adventure store struct start to the actual stage table
         private const int TableOffset = 0xF0;
+        // The offset from the AdventureMode instance that marks refresh as needed
+        private const int RefreshPendingOffset = 0xB0;
 
-        public AdventureMemoryModule(GameBridge game, ILogger<AdventureMemoryModule> logger) : base(game, logger) { }
+        private ILogger<AdventureMemoryModule> _logger;
+
+        public AdventureMemoryModule(GameBridge game, ILogger<AdventureMemoryModule> logger) : base(game, logger) 
+        {
+            _logger = logger;
+        }
 
         /// <summary>
         /// Direct reference to the start of the stage table
@@ -64,6 +71,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { ApUnlocked = unlocked });
+            RefreshMap();
         }
 
         /// <summary>
@@ -77,6 +85,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
             nint address = RecordAddr(index);
             AdventureStage stage = AdventureDecode.Decode(index, ReadStruct<StageRecord>(address));
             Write(index, stage with { Stars = stars });
+            RefreshMap();
         }
 
         public void Write(int index, AdventureStage stage)
@@ -99,6 +108,19 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         public void SetCursorIndex(ushort index)
         {
             WriteStruct(StaticMemoryLocation.AdventureModeCursorGlobal.Ptr(), index);
+        }
+
+        /// <summary>
+        /// Marks map as dirty, causes refresh
+        /// </summary>
+        public void RefreshMap()
+        {
+            if (!ModeReader.IsAdventure(_gameBridge)) return;
+
+            IntPtr instance = ReadPtr(StaticMemoryLocation.AdventureModeInstanceGlobal.Ptr());
+            if (instance == IntPtr.Zero) return;
+
+            WriteStruct<ushort>(instance + RefreshPendingOffset, 1);
         }
     }
 }
