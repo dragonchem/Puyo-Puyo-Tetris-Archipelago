@@ -38,7 +38,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
         /// <summary>
         /// Builds the jump instruction that redirects to the cave
         /// </summary>
-        internal byte[] BuildDetour()
+        public byte[] BuildDetour()
         {
             int padding = (int)HookLength - MinimalDetourLength;
 

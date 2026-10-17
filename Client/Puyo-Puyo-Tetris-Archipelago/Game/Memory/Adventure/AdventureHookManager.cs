@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
 {
     /// <summary>
     /// Manages the hooks for the adventure mode, registering and keeping their state up to date

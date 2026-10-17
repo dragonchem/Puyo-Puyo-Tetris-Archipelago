@@ -10,7 +10,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks
     /// <summary>
     /// Dynamic assembler used to translate instructions into raw bytes
     /// </summary>
-    internal static class Assembler
+    public static class Assembler
     {
         /// <summary>
         /// Turns a list of instructions into a raw byte array

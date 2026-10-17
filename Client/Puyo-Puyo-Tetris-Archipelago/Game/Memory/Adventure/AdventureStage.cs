@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 {
-    internal static class StageMasks
+    public static class StageMasks
     {
         public const uint GameCleared = 0b1; // bit 0 = 0000 0001 -> stage cleared
         public const uint ApUnlocked = 1u << 31; // bit 31 -> ap stage unlocked
@@ -27,7 +27,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
     /// <param name="Score"></param>
     public readonly record struct AdventureStage(int Act, int Stage, bool GameCleared, bool ApUnlocked, int Stars, bool Visited, uint Score);
 
-    internal static class AdventureDecode
+    public static class AdventureDecode
     {
         /// <summary>
         /// Masks the raw stage values and decodes them into the AdventureStage record
@@ -35,18 +35,22 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         /// <param name="i"></param>
         /// <param name="raw"></param>
         /// <returns></returns>
-        public static AdventureStage Decode(int i, StageRecord raw) => new AdventureStage(
-            Act: i / 10 + 1,
-            Stage: i % 10 + 1,
-            GameCleared: (raw.Tag & StageMasks.GameCleared) != 0,
-            Stars: (int)(raw.Tag & StageMasks.Stars) >> StageMasks.StarsShift,
-            Visited: (raw.Tag & StageMasks.Visited) != 0,
-            ApUnlocked: (raw.Tag & StageMasks.ApUnlocked) != 0,
-            Score: raw.Score
-        );
+        public static AdventureStage Decode(int i, StageRecord raw) {
+            if (i < 0 || i > 99) throw new ArgumentOutOfRangeException("i", "Index must be within 0 - 99");
+
+            return new AdventureStage(
+                Act: i / 10 + 1,
+                Stage: i % 10 + 1,
+                GameCleared: (raw.Tag & StageMasks.GameCleared) != 0,
+                Stars: (int)(raw.Tag & StageMasks.Stars) >> StageMasks.StarsShift,
+                Visited: (raw.Tag & StageMasks.Visited) != 0,
+                ApUnlocked: (raw.Tag & StageMasks.ApUnlocked) != 0,
+                Score: raw.Score
+            );
+        } 
     }
 
-    internal static class AdventureEncode
+    public static class AdventureEncode
     {
         /// <summary>
         /// Encodes the AdventureStage record back into a uint raw tag, preserving any bits we do not touch
@@ -56,6 +60,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
         /// <returns></returns>
         public static StageRecord Encode(AdventureStage stage, uint rawTag)
         {
+            if (stage.Stars < 0 || stage.Stars > 3)
+                throw new ArgumentOutOfRangeException("stage.Stars", "Stars must be within 0 - 3");
+            if (stage.Act < 0 || stage.Act > 10)
+                throw new ArgumentOutOfRangeException("stage.Act", "Act must be within 0 - 10");
+            if (stage.Stage < 0 || stage.Stage > 10)
+                throw new ArgumentOutOfRangeException("stage.Stage", "Stage must be within 0 - 10");
+
             // Copy rawTag values into new uint for manipulation
             uint newTag = rawTag;
 
@@ -76,7 +87,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
     /// <summary>
     /// Raw struct for the stage record data
     /// </summary>
-    internal struct StageRecord
+    public struct StageRecord
     {
         /// <summary>
         /// bit0 = cleared, bit1-2 = stars, bit3-4 = medal? (sourced by bayoen, never seen it set), bit8 = visited

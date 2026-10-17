@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 {
     public class AdventureMemoryModule : GameMemoryModule
     {

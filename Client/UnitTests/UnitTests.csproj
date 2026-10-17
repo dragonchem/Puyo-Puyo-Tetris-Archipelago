@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -14,7 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Puyo-Puyo-Tetris-Archipelago\Puyo-Puyo-Tetris-Archipelago.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Game\Memory\Hooks\Adventure\" />
+    <Folder Include="Game\Memory\Hooks\Frame\" />
+    <Folder Include="Mock\" />
   </ItemGroup>
 
 </Project>
