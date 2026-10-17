@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
+namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
 {
     /// <summary>
     /// Manages the hooks for the adventure mode, registering and keeping their state up to date
@@ -80,7 +80,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
                 new NavigateRightHook(_game.Game, _logger),
                 new NavigateLeftHook(_game.Game, _logger),
                 new ActChangeHook(_game.Game, _logger),
-                new MouseStageHook(_game.Game, _logger)
+                new MouseStageHook(_game.Game, _logger),
+                new StageGrayOutHook(_game.Game, _logger),
+                new StageNewSkipHook(_game.Game, _logger),
             };
         }
     }

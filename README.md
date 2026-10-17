@@ -3,6 +3,11 @@ Archipelago implementation for Puyo Puyo Tetris
 
 Still in very early stages
 
+## Download
+| Stable<br>Tested and Verified | Beta<br>Tested but not Verified | Dev<br>Active WIP |
+| ----------------------------- | ------------------------------- | ----------------- |
+| [download](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/releases/latest) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-beta/beta/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-dev/dev/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) |
+
 ## Credits
 Zetris: https://github.com/ZetrisAI, contains various sources that touch memory manipulation
 PPT-Sandbox: https://github.com/FugEbinMeme/PPT-Sandbox, by the creator of Zetris, a tool to change memory values
