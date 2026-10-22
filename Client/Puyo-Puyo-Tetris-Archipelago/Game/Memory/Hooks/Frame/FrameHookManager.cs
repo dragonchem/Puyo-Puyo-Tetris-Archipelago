@@ -15,7 +15,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
     /// </summary>
     public sealed class FrameHookManager : IPollable
     {
-        private readonly GameBridge _game;
+        private readonly IGameBridge _game;
         private readonly ILogger<FrameHookManager> _logger;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
         /// </summary>
         private List<IGameHook>? _hooks = null;
 
-        public FrameHookManager(GameBridge game, ILogger<FrameHookManager> logger)
+        public FrameHookManager(IGameBridge game, ILogger<FrameHookManager> logger)
         {
             _game = game;
             _logger = logger;

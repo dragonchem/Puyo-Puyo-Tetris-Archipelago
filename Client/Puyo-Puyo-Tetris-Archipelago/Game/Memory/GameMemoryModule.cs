@@ -17,10 +17,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
     /// </summary>
     public abstract class GameMemoryModule
     {
-        protected readonly GameBridge _gameBridge;
+        protected readonly IGameBridge _gameBridge;
         private readonly ILogger<GameMemoryModule> _logger;
 
-        protected GameMemoryModule(GameBridge gameBridge, ILogger<GameMemoryModule> logger)
+        protected GameMemoryModule(IGameBridge gameBridge, ILogger<GameMemoryModule> logger)
         {
             _gameBridge = gameBridge;
             _logger = logger;

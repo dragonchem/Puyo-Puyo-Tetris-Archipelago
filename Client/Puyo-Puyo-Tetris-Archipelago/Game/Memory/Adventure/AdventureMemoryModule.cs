@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 {
-    public class AdventureMemoryModule : GameMemoryModule
+    public class AdventureMemoryModule : GameMemoryModule, IAdventureMemoryModule
     {
         public const int StageCount = 100;
         // The offset from the Adventure store struct start to the actual stage table
@@ -18,7 +18,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 
         private ILogger<AdventureMemoryModule> _logger;
 
-        public AdventureMemoryModule(GameBridge game, ILogger<AdventureMemoryModule> logger) : base(game, logger) 
+        public AdventureMemoryModule(IGameBridge game, ILogger<AdventureMemoryModule> logger) : base(game, logger) 
         {
             _logger = logger;
         }

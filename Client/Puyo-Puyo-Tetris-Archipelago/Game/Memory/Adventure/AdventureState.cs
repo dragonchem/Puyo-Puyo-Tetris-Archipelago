@@ -10,8 +10,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 {
     public class AdventureState : IPollable
     {
-        private readonly AdventureMemoryModule _memoryModule;
-        private readonly GameBridge _game;
+        private readonly IAdventureMemoryModule _memoryModule;
+        private readonly IGameBridge _game;
         public AdventureStage[]? State;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         /// </summary>
         public event EventHandler<AdventureStage[]>? StateChanged;
 
-        public AdventureState(AdventureMemoryModule mem, GameBridge game)
+        public AdventureState(IAdventureMemoryModule mem, IGameBridge game)
         {
             _memoryModule = mem;
             _game = game;

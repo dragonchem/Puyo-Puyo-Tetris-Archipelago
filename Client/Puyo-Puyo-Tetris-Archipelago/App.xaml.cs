@@ -47,11 +47,11 @@ namespace Puyo_Puyo_Tetris_Archipelago
 
             // All classes we want to have as singletons
             serviceCollection.AddSingleton<NavigationService>();
-            serviceCollection.AddSingleton<GameBridge>();
+            serviceCollection.AddSingleton<IGameBridge, GameBridge>();
             serviceCollection.AddSingleton<GameLoop>();
 
             // Memory modules
-            serviceCollection.AddSingleton<AdventureMemoryModule>();
+            serviceCollection.AddSingleton<IAdventureMemoryModule, AdventureMemoryModule>();
 
             // State modules
             serviceCollection.AddSingleton<AdventureState>();

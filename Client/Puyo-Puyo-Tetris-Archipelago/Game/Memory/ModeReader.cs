@@ -21,10 +21,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
             return (GameMode)raw;
         }
         
-        public static GameMode Read(GameBridge bridge)
+        public static GameMode Read(IGameBridge bridge)
             => bridge.Attached && bridge.Game != null ? Read(bridge.Game) : GameMode.None;
 
         public static bool IsAdventure(IProcessMemory game) => Read(game) == GameMode.Adventure;
-        public static bool IsAdventure(GameBridge bridge) => Read(bridge) == GameMode.Adventure;
+        public static bool IsAdventure(IGameBridge bridge) => Read(bridge) == GameMode.Adventure;
     }
 }

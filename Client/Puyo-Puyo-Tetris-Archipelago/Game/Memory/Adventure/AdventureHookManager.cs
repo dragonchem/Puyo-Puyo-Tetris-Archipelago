@@ -15,10 +15,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
     /// </summary>
     public sealed class AdventureHookManager : IPollable
     {
-        private readonly GameBridge _game;
+        private readonly IGameBridge _game;
         private readonly ILogger<AdventureHookManager> _logger;
         private List<IGameHook>? _hooks = null;
-        public AdventureHookManager(GameBridge game, ILogger<AdventureHookManager> logger)
+        public AdventureHookManager(IGameBridge game, ILogger<AdventureHookManager> logger)
         {
             _game = game;
             _logger = logger;
