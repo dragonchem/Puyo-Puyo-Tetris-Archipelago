@@ -13,6 +13,7 @@ using Serilog.Core;
 using Serilog.Events;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 
 namespace Puyo_Puyo_Tetris_Archipelago
@@ -20,6 +21,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class App : Application
     {
         // Dependency injection setup for WPF (default always set, surpresses warning)
