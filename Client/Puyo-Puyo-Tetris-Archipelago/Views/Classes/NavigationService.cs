@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 
 namespace Puyo_Puyo_Tetris_Archipelago.Views.Classes
 {
+    [ExcludeFromCodeCoverage]
     public class NavigationService
     {
         public NavigationService()
