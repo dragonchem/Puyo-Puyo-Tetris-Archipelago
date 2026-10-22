@@ -17,21 +17,18 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
     {
         private readonly IGameBridge _game;
         private readonly ILogger<FrameHookManager> _logger;
-
-        /// <summary>
-        /// Code caves for the functions we want to call
-        /// </summary>
-        private List<CodeCave>? _frameHooks = null;
+        private readonly IHookProvider _hookProvider;
 
         /// <summary>
         /// The detour hooks we want to call
         /// </summary>
         private List<IGameHook>? _hooks = null;
 
-        public FrameHookManager(IGameBridge game, ILogger<FrameHookManager> logger)
+        public FrameHookManager(IGameBridge game, ILogger<FrameHookManager> logger, IHookProvider hookProvider)
         {
             _game = game;
             _logger = logger;
+            _hookProvider = hookProvider;
         }
 
 
@@ -64,38 +61,12 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
                 return;
             }
 
-            if (_hooks == null) _hooks = BuildHooks();
+            if (_hooks == null) _hooks = _hookProvider.Build(_game.Game);
 
             foreach (IGameHook hook in _hooks)
             {
                 ProgressHook(hook);
             }
-        }
-
-        /// <summary>
-        /// The per-frame list. Add a detour-less <see cref="CodeCave"/> here to run new logic each frame, nothing
-        /// else. Empty for now.
-        /// </summary>
-        private List<CodeCave> BuildFrameHooks(IProcessMemory game, ILogger logger) => new()
-        {
-            new ActivateMapRefreshHook(game, logger)
-        };
-
-        /// <summary>
-        /// Builds the detour we use to trigger the code caves
-        /// </summary>
-        private List<IGameHook> BuildHooks()
-        {
-            IProcessMemory g = _game.Game ?? throw new InvalidOperationException("Can't build hooks when game is not attached");
-
-            _frameHooks = BuildFrameHooks(g, _logger);
-
-            if (_frameHooks.Count == 0) return new List<IGameHook>();
-
-            return new List<IGameHook>()
-            {
-                new FrameDispatcherHook(g, _logger, _frameHooks),  // runs the frame hooks every frame
-            };
         }
 
         public void DestroyAll()
@@ -109,8 +80,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
                 }
                 _hooks = null;
             }
-
-            _frameHooks = null;
         }
     }
 }

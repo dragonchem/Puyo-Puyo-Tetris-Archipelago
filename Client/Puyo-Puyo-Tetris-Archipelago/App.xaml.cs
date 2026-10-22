@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Views;
@@ -57,8 +58,24 @@ namespace Puyo_Puyo_Tetris_Archipelago
             serviceCollection.AddSingleton<AdventureState>();
 
             // Hook managers
-            serviceCollection.AddSingleton<AdventureHookManager>();
-            serviceCollection.AddSingleton<FrameHookManager>();
+            serviceCollection.AddSingleton<AdventureHookProvider>();
+            serviceCollection.AddSingleton<FrameHookProvider>();
+
+            serviceCollection.AddSingleton(
+                sp => new AdventureHookManager(
+                    sp.GetRequiredService<IGameBridge>(),
+                    sp.GetRequiredService<ILogger<AdventureHookManager>>(),
+                    sp.GetRequiredService<AdventureHookProvider>()
+                )    
+            );
+
+            serviceCollection.AddSingleton(
+                sp => new FrameHookManager(
+                    sp.GetRequiredService<IGameBridge>(),
+                    sp.GetRequiredService<ILogger<FrameHookManager>>(),
+                    sp.GetRequiredService<FrameHookProvider>()
+                )
+            );
 
             // Pollables
             serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<AdventureState>());

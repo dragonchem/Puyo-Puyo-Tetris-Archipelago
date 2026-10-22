@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Adventure;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
@@ -17,11 +18,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
     {
         private readonly IGameBridge _game;
         private readonly ILogger<AdventureHookManager> _logger;
+        private readonly IHookProvider _hookProvider;
         private List<IGameHook>? _hooks = null;
-        public AdventureHookManager(IGameBridge game, ILogger<AdventureHookManager> logger)
+        public AdventureHookManager(IGameBridge game, ILogger<AdventureHookManager> logger, IHookProvider hookProvider)
         {
             _game = game;
             _logger = logger;
+            _hookProvider = hookProvider;
         }
 
         public void Poll()
@@ -33,7 +36,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
                 return;
             }
 
-            if (_hooks == null) _hooks = BuildHooks();
+            if (_hooks == null) _hooks = _hookProvider.Build(_game.Game).ToList();
 
             foreach (IGameHook hook in _hooks)
             {
@@ -70,20 +73,6 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory
                 hook.Free();
             }
             _hooks = null;
-        }
-
-        private List<IGameHook> BuildHooks()
-        {
-            if (_game.Game == null) throw new InvalidOperationException("Can't build hooks when game is not attached");
-            return new List<IGameHook>()
-            {
-                new NavigateRightHook(_game.Game, _logger),
-                new NavigateLeftHook(_game.Game, _logger),
-                new ActChangeHook(_game.Game, _logger),
-                new MouseStageHook(_game.Game, _logger),
-                new StageGrayOutHook(_game.Game, _logger),
-                new StageNewSkipHook(_game.Game, _logger),
-            };
         }
     }
 }
