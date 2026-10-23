@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Puyo_Puyo_Tetris_Archipelago.Game
 {
-    public class GameBridge
+    public class GameBridge : IGameBridge
     {
         private readonly ILogger<GameBridge> _logger;
         // The process name to target
@@ -66,7 +66,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         /// Check if game is running
         /// </summary>
         /// <returns></returns>
-        public static bool IsGameRunning()
+        public bool IsGameRunning()
         {
             Process[] processes = Process.GetProcessesByName(ProcessName);
             return processes.Length > 0;
@@ -77,7 +77,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         /// </summary>
         /// <param name="proc"></param>
         /// <returns></returns>
-        public static string? TryGetInstallDir(Process proc)
+        public string? TryGetInstallDir(Process proc)
         {
             try
             {

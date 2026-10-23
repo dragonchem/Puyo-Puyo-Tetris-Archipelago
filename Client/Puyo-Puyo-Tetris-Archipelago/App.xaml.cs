@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame;
 using Puyo_Puyo_Tetris_Archipelago.Interfaces;
 using Puyo_Puyo_Tetris_Archipelago.Views;
@@ -12,6 +13,7 @@ using Serilog.Core;
 using Serilog.Events;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 
 namespace Puyo_Puyo_Tetris_Archipelago
@@ -19,6 +21,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class App : Application
     {
         // Dependency injection setup for WPF (default always set, surpresses warning)
@@ -47,18 +50,34 @@ namespace Puyo_Puyo_Tetris_Archipelago
 
             // All classes we want to have as singletons
             serviceCollection.AddSingleton<NavigationService>();
-            serviceCollection.AddSingleton<GameBridge>();
+            serviceCollection.AddSingleton<IGameBridge, GameBridge>();
             serviceCollection.AddSingleton<GameLoop>();
 
             // Memory modules
-            serviceCollection.AddSingleton<AdventureMemoryModule>();
+            serviceCollection.AddSingleton<IAdventureMemoryModule, AdventureMemoryModule>();
 
             // State modules
             serviceCollection.AddSingleton<AdventureState>();
 
             // Hook managers
-            serviceCollection.AddSingleton<AdventureHookManager>();
-            serviceCollection.AddSingleton<FrameHookManager>();
+            serviceCollection.AddSingleton<AdventureHookProvider>();
+            serviceCollection.AddSingleton<FrameHookProvider>();
+
+            serviceCollection.AddSingleton(
+                sp => new AdventureHookManager(
+                    sp.GetRequiredService<IGameBridge>(),
+                    sp.GetRequiredService<ILogger<AdventureHookManager>>(),
+                    sp.GetRequiredService<AdventureHookProvider>()
+                )    
+            );
+
+            serviceCollection.AddSingleton(
+                sp => new FrameHookManager(
+                    sp.GetRequiredService<IGameBridge>(),
+                    sp.GetRequiredService<ILogger<FrameHookManager>>(),
+                    sp.GetRequiredService<FrameHookProvider>()
+                )
+            );
 
             // Pollables
             serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<AdventureState>());
