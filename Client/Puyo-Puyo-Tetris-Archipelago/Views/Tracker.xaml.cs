@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
     /// <summary>
     /// Interaction logic for Tracker.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class APTrackerView : UserControl
     {
         public APTrackerView()

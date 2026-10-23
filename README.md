@@ -6,7 +6,9 @@ Still in very early stages
 ## Download
 | Stable<br>Tested and Verified | Beta<br>Tested but not Verified | Dev<br>Active WIP |
 | ----------------------------- | ------------------------------- | ----------------- |
+| [![Tests](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-main.yml/badge.svg)](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-main.yml) | [![Tests](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-beta.yml/badge.svg)](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-beta.yml) | [![Tests](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-dev.yml/badge.svg)](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/actions/workflows/workflow-dev.yml) |
 | [download](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/releases/latest) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-beta/beta/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-dev/dev/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) |
+| [apworld]() | [apworld]() | [apworld]() |
 
 ## Credits
 Zetris: https://github.com/ZetrisAI, contains various sources that touch memory manipulation

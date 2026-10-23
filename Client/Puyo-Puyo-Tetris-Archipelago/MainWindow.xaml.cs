@@ -2,6 +2,7 @@
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Views;
 using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,6 +11,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class MainWindow : Window
     {
         private readonly NavigationService _clientEvents;

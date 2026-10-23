@@ -91,11 +91,9 @@ jobs:
     - name: Attach build to the release
       shell: pwsh
       run: |
-        $stable = "Puyo-Puyo-Tetris-Archipelago.zip"
         $versioned = "Puyo-Puyo-Tetris-Archipelago-$env:TAG.zip"
-        Compress-Archive -Path publish\* -DestinationPath $stable -Force
-        Copy-Item $stable $versioned -Force
-        gh release upload $env:TAG $stable $versioned --clobber
+        Compress-Archive -Path publish\* -DestinationPath $versioned -Force
+        gh release upload $env:TAG $versioned --clobber
 
     - name: Upload code-coverage (raw)
       if: always()

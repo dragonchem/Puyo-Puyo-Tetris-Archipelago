@@ -11,7 +11,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
 {
     public class GameLoop : IDisposable
     {
-        private readonly GameBridge _game;
+        private readonly IGameBridge _game;
         private readonly IEnumerable<IPollable> _pollables;
         private readonly ILogger<GameLoop> _logger;
 
@@ -24,7 +24,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         private bool running = false;
 
 
-        public GameLoop(GameBridge game, ILogger<GameLoop> logger, IEnumerable<IPollable> pollables)
+        public GameLoop(IGameBridge game, ILogger<GameLoop> logger, IEnumerable<IPollable> pollables)
         {
             _game = game;
             _logger = logger;

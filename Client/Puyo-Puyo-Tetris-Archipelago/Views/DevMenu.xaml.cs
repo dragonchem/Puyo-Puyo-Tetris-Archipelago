@@ -1,5 +1,6 @@
 ﻿using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,11 +10,12 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
     /// <summary>
     /// Interaction logic for DevMenu.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class APDevMenu : UserControl
     {
-        private readonly GameBridge _game;
+        private readonly IGameBridge _game;
         private readonly AdventureState _adventureState;
-        public APDevMenu(GameBridge game, AdventureState adventureState)
+        public APDevMenu(IGameBridge game, AdventureState adventureState)
         {
             InitializeComponent();
             _game = game;
