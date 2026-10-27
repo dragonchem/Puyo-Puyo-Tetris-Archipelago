@@ -118,6 +118,8 @@ jobs:
 
     env:
       Package_Name: puyo_puyo_tetris
+      TAG: ${{ github.event.release.tag_name }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
     - name: Checkout
@@ -132,8 +134,5 @@ jobs:
         cd dist
         zip -r -X ../$Package_Name.apworld $Package_Name
 
-    - name: Upload apworld
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ env.Package_Name }}-apworld
-        path: ${{ env.Package_Name }}.apworld
+    - name: Attach apworld to the release
+      run: gh release upload "$TAG" "$Package_Name-$TAG.apworld" --clobber
