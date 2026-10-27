@@ -12,6 +12,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
     {
         private const ulong ActivateMapKick = 0x1400F72E0;
 
+        private const ulong MapObjectVTable = 0x140371740; // vtable of the live map object; a stage repoints the global to a child whose +0xC8 is not a map sub-object
+
         private const int RefreshPendingOffset = 0xB0; // u16 "refresh pending" slot on AdventureMode
         private const int MapSubObjectOffset = 0xC8; // AdventureMode -> map sub-object
         private const int MapStateObjectOffset = 0x28; // map sub-object -> state object (the kick's argument)
@@ -44,6 +46,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Hooks.Frame
             a.mov(rcx, __qword_ptr[rax]); // rcx = AdventureMode*
             a.test(rcx, rcx);
             a.je(done);
+
+            // map screen live? inside a stage the global points at a different object whose
+            // +0xC8 is not a map sub-object, so check the vtable before dereferencing anything below
+            a.mov(rax, __qword_ptr[rcx]);   // rax = vtable [instance + 0]
+            a.mov(rdx, MapObjectVTable);    // rdx = live map object's vtable
+            a.cmp(rax, rdx);
+            a.jne(done);                    // different object (in a stage / other screen) -> leave
 
             // pending = u16 [instance + 0xB0]; nothing requested -> leave
             a.movzx(eax, __word_ptr[rcx + RefreshPendingOffset]);
