@@ -12,6 +12,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
     {
         public event EventHandler? OnAttach;
         public event EventHandler? OnDetach;
+        public event EventHandler? OnElevationRequired;
         public IProcessMemory? Game { get; }
         public bool Attached { get; }
         public Task RunAttachLoop(CancellationToken cancellationToken);
