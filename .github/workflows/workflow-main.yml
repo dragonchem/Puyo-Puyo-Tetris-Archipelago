@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  client:
 
     strategy:
       matrix:
@@ -99,3 +99,32 @@ jobs:
       with:
         name: Puyo-Puyo-Tetris-Archipelago-win-x64
         path: publish
+
+  apworld:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      Package_Name: puyo_puyo_tetris
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Package apworld
+      run: |
+        mkdir -p dist/$Package_Name
+        cp -r World/. dist/$Package_Name/
+        find dist/$Package_Name -name '__pycache__' -type d -prune -exec rm -rf {} +
+        rm -rf dist/$Package_Name/test
+        cd dist
+        zip -r -X ../$Package_Name.apworld $Package_Name
+
+    - name: Upload apworld
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.Package_Name }}-apworld
+        path: ${{ env.Package_Name }}.apworld
