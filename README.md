@@ -10,6 +10,13 @@ Still in very early stages
 | [download](https://github.com/dragonchem/Puyo-Puyo-Tetris-Archipelago/releases/latest) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-beta/beta/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) | [download](https://nightly.link/dragonchem/Puyo-Puyo-Tetris-Archipelago/workflows/workflow-dev/dev/Puyo-Puyo-Tetris-Archipelago-win-x64.zip) |
 | [apworld]() | [apworld]() | [apworld]() |
 
+## AI Usage Disclosure
+All generative AI has been purposefully avoided in the making of the game client and apworld.
+All of the assets are either custom made, or ripped from the game's sprite sheets (https://www.spriters-resource.com/pc_computer/puyopuyotetris/).
+
+Some other programs were referenced in the making of this client, such as the credits mentioned below, or APQuest (the archipelago example world).
+These may have been AI assisted, but I believe none of the current code used in the project has been touched by AI.
+
 ## Credits
 Zetris: https://github.com/ZetrisAI, contains various sources that touch memory manipulation
 PPT-Sandbox: https://github.com/FugEbinMeme/PPT-Sandbox, by the creator of Zetris, a tool to change memory values
