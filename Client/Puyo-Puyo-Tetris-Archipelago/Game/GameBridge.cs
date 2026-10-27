@@ -22,9 +22,14 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
         // Game installation directory
         public string InstallDir { get; private set; } = string.Empty;
 
+        // Only prompt elevation once
+        private int _elevationPromptedPid = -1;
+
         // Events
         public event EventHandler? OnAttach;
         public event EventHandler? OnDetach;
+
+        public event EventHandler? OnElevationRequired;
 
 
         public GameBridge(ILogger<GameBridge> logger)
@@ -116,6 +121,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
             if (!VerifyAttached())
             {
                 Game = null; // process exists but isn't the build we expect (or isn't ready yet)
+
+                VerifyElevation(gameProcess);
+
                 return;
             }
 
@@ -123,6 +131,23 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game
             InstallDir = TryGetInstallDir(gameProcess) ?? string.Empty;
             _logger.LogInformation("Successfully attached to game process {Pid}", gameProcess.Id);
             OnAttach?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Check if Administrator mode is required, relaunch client in administrator mode and close self
+        /// </summary>
+        private void VerifyElevation(Process gameProcess)
+        {
+            bool accessDenied = Elevation.OpenFailedAccessDenied(gameProcess.Id);
+            if (!Elevation.IsElevated && accessDenied && _elevationPromptedPid != gameProcess.Id)
+            {
+                // Only once per client launch
+                _elevationPromptedPid = gameProcess.Id;
+
+                // Call event to trigger actual confirm
+                OnElevationRequired?.Invoke(this, EventArgs.Empty);
+            }
+            return;
         }
 
         /// <summary>

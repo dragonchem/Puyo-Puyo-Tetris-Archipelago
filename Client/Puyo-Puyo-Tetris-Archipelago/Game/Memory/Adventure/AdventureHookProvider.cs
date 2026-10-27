@@ -30,6 +30,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
             new MouseStageHook(game, _logger),
             new StageGrayOutHook(game, _logger),
             new StageNewSkipHook(game, _logger),
+            new MapCursorAdvanceHook(game, _logger)
         };
     }
 }
