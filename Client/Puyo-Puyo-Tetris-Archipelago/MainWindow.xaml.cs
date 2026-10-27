@@ -2,6 +2,8 @@
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Views;
 using Puyo_Puyo_Tetris_Archipelago.Views.Classes;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Input;
@@ -21,6 +23,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
         private readonly APTrackerView _apTrackerView;
         private readonly APSetupView _apSetupView;
         private readonly APDevMenu _devMenu;
+        private readonly IGameBridge _gameBridge;
         
         // Classes in constructor are injected by dependency injection
         public MainWindow(
@@ -29,7 +32,8 @@ namespace Puyo_Puyo_Tetris_Archipelago
             GameLoop gameLoop,
             APDevMenu apDevMenu,
             APSetupView apSetupView,
-            APTrackerView apTrackerView
+            APTrackerView apTrackerView,
+            IGameBridge gameBridge
         )
         {
             // Initializes the window for rendering
@@ -42,6 +46,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
             _devMenu = apDevMenu;
             _apSetupView = apSetupView;
             _apTrackerView = apTrackerView;
+            _gameBridge = gameBridge;
 
             // Show setup screen
             ViewRoot.Children.Add(_apSetupView);
@@ -53,6 +58,39 @@ namespace Puyo_Puyo_Tetris_Archipelago
 
             // Start main game loop
             _gameLoop.Start();
+
+            _gameBridge.OnElevationRequired += OnElevationRequired;
+        }
+
+        private void OnElevationRequired(object? sender, EventArgs e)
+        {
+            // Show confirm to user
+            var choice = MessageBox.Show(
+                "Your game is running in Administrator mode, this client is not. Would you like to re-launch this client in Administrator mode? If no, you must launch the game in user mode.",
+                "Game is running as Administrator",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            // If denied, continue, user's own responsibility
+            if (choice != MessageBoxResult.Yes) return;
+
+            try
+            {
+                // Launch self, requesting admin
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Environment.ProcessPath!,
+                    UseShellExecute = true,
+                    Verb = "runas"
+                });
+            }
+            catch (Win32Exception ex) when (ex.NativeErrorCode == 1223) // 1223 = Admin denied
+            {
+                return;
+            }
+
+            // Shut down self
+            Application.Current.Shutdown();
         }
 
         private void OnViewChange(object? sender, ViewType viewType)
