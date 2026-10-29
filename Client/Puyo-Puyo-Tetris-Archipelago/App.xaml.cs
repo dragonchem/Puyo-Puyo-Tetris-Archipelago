@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection;
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
@@ -52,6 +53,9 @@ namespace Puyo_Puyo_Tetris_Archipelago
             serviceCollection.AddSingleton<NavigationService>();
             serviceCollection.AddSingleton<IGameBridge, GameBridge>();
             serviceCollection.AddSingleton<GameLoop>();
+
+            // Archipelago
+            serviceCollection.AddSingleton<IArchipelagoConnection, ArchipelagoConnection>();
 
             // Memory modules
             serviceCollection.AddSingleton<IAdventureMemoryModule, AdventureMemoryModule>();

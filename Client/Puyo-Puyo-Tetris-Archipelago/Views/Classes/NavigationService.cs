@@ -22,6 +22,11 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Classes
             );
         }
 
+        public void ChangeView(ViewType viewType)
+        {
+            OnViewChange?.Invoke(this, viewType);
+        }
+
         private void GlobalKeyDown(object sender, KeyEventArgs e)
         {
             // If F9 pressed at any time, trigger view change event to devmenu

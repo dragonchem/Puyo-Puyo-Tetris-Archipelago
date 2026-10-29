@@ -57,7 +57,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
         /// <returns></returns>
         public async Task<bool> Connect(ConnectionInfo info)
         {
-            if (info.Port == null || int.TryParse(info.Port, out int _))
+            // Input validation
+            if (string.IsNullOrEmpty(info.Host))
+                throw new ArgumentException("Invalid host");
+            if (info.Port == null || !int.TryParse(info.Port, out int _))
+                throw new ArgumentException("Invalid port");
+            if (string.IsNullOrEmpty(info.Slot))
+                throw new ArgumentException("Slot is required");
 
             // Reset current state
             Disconnect();
