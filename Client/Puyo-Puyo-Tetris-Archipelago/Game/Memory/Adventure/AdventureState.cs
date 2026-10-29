@@ -104,7 +104,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
                     }
 
                     // Enforce star status
-                    if (_desiredStars[i] != currStage.Stars)
+                    if (_desiredStars[i] > currStage.Stars)
                     {
                         _memoryModule.SetStars(i, _desiredStars[i]);
                         currStage = currStage with { Stars =  _desiredStars[i] };

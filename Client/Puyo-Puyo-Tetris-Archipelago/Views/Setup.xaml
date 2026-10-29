@@ -60,7 +60,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Slot:" Margin="0,5"/>
-                            <TextBox Grid.Column="1" Name="SlotTextBox" Margin="0,5"/>
+                            <TextBox Grid.Column="1" Name="SlotTextBox" Margin="0,5" Text="38281"/>
                         </Grid>
                         
                         <Grid Name="PasswordInputGrid">
