@@ -17,6 +17,16 @@ All of the assets are either custom made, or ripped from the game's sprite sheet
 Some other programs were referenced in the making of this client, such as the credits mentioned below, or APQuest (the archipelago example world).
 These may have been AI assisted, but I believe none of the current code used in the project has been touched by AI.
 
+## Install instructions
+1. Go to the version you want to download, Stable (not released yet), Beta or Dev.
+2. Download the client zip, and the apworld.
+3. Install the apworld into your local archipelago, open the launcher and open the options creator.
+4. Set your desired options, then export the yaml.
+5. Create a multiworld (https://archipelago.gg/tutorial/Archipelago/setup_en).
+6. Launch both the client and Puyo Puyo Tetris (order does not matter).
+7. Connect to the multiworld host, and you should be ready to go!
+
+
 ## Credits
 Zetris: https://github.com/ZetrisAI, contains various sources that touch memory manipulation
 PPT-Sandbox: https://github.com/FugEbinMeme/PPT-Sandbox, by the creator of Zetris, a tool to change memory values
