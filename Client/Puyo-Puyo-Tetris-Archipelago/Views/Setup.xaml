@@ -51,7 +51,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Port:" Margin="0,5"/>
-                            <TextBox Grid.Column="1" Name="PortTextBox" Margin="0,5"/>
+                            <TextBox Grid.Column="1" Name="PortTextBox" Margin="0,5" Text="38281"/>
                         </Grid>
                         
                         <Grid Name="SlotInputGrid">
@@ -75,7 +75,7 @@
                 </ScrollViewer>
 
                 <!--Connect button, stretch horizontally, auto height-->
-                <Button Grid.Row="1" Name="ConnectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="0,10" />
+                <Button Grid.Row="1" Click="ConnectButton_Click" Name="ConnectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="0,10" />
             </Grid>
         </Grid>
     </Grid>
