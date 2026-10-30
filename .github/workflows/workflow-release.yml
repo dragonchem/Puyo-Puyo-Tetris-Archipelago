@@ -114,7 +114,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
 
     env:
       Package_Name: puyo_puyo_tetris
@@ -135,4 +135,4 @@ jobs:
         zip -r -X ../$Package_Name.apworld $Package_Name
 
     - name: Attach apworld to the release
-      run: gh release upload "$TAG" "$Package_Name-$TAG.apworld" --clobber
+      run: gh release upload "$TAG" "$Package_Name.apworld" --clobber
