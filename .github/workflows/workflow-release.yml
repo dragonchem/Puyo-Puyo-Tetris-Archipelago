@@ -3,6 +3,11 @@ name: Release
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to attach assets to
+        required: true
 
 jobs:
 
@@ -17,8 +22,8 @@ jobs:
     env:
       Solution_Name: Client\Puyo-Puyo-Tetris-Archipelago.sln
       Test_Project_Path: Client\UnitTests\UnitTests.csproj
-      TAG: ${{ github.event.release.tag_name }}
-      CONFIGURATION: ${{ startsWith(github.event.release.tag_name, 'dev_') && 'Debug' || 'Release' }}
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      CONFIGURATION: ${{ startsWith(github.event.release.tag_name || inputs.tag, 'dev_') && 'Debug' || 'Release' }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -118,7 +123,7 @@ jobs:
 
     env:
       Package_Name: puyo_puyo_tetris
-      TAG: ${{ github.event.release.tag_name }}
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
