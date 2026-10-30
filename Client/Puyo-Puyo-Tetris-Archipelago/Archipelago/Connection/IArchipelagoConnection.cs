@@ -26,7 +26,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
         /// <summary>
         /// Items we have received
         /// </summary>
-        IReadOnlySet<long> ReceivedItemIds { get; }
+        IReadOnlyCollection<long> ReceivedItemIds { get; }
 
         // Events, mostly forwards
         event EventHandler? OnConnected;
@@ -47,5 +47,16 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
         /// TODO: decide if we should immediately mark everything as locked until reconnected
         /// </summary>
         void Disconnect();
+
+        /// <summary>
+        /// Marks the location as checked on the server
+        /// </summary>
+        /// <param name="locationIds"></param>
+        void SendLocations(params IReadOnlyCollection<long> locationIds);
+
+        /// <summary>
+        /// Marks the game as completed
+        /// </summary>
+        void SendGoal();
     }
 }

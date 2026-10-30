@@ -8,5 +8,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Modules
 {
     public interface IArchipelagoModule
     {
+        /// <summary>
+        /// Sync up the current state to the 
+        /// </summary>
+        void Sync();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Puyo_Puyo_Tetris_Archipelago.Archipelago;
 using Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection;
+using Puyo_Puyo_Tetris_Archipelago.Archipelago.Translation;
 using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
@@ -55,7 +57,9 @@ namespace Puyo_Puyo_Tetris_Archipelago
             serviceCollection.AddSingleton<GameLoop>();
 
             // Archipelago
+            serviceCollection.AddSingleton<ItemLocations>();
             serviceCollection.AddSingleton<IArchipelagoConnection, ArchipelagoConnection>();
+            serviceCollection.AddSingleton<ArchipelagoManager>();
 
             // Memory modules
             serviceCollection.AddSingleton<IAdventureMemoryModule, AdventureMemoryModule>();
@@ -87,6 +91,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
             serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<AdventureState>());
             serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<AdventureHookManager>());
             serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<FrameHookManager>());
+            serviceCollection.AddSingleton<IPollable>(services => services.GetRequiredService<ArchipelagoManager>());
 
             // Add the various usercontrols / views to the DI to make them DI aware
             serviceCollection.AddSingleton<APDevMenu>();

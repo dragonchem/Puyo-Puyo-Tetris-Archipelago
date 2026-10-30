@@ -41,7 +41,8 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
         /// <summary>
         /// Items we have received
         /// </summary>
-        public IReadOnlySet<long> ReceivedItemIds => _receivedItemIds;
+        public IReadOnlyCollection<long> ReceivedItemIds =>
+            _session?.Items.AllItemsReceived.Select(x => x.ItemId).ToList() ?? (IReadOnlyCollection<long>)Array.Empty<long>();
         
         // Events, mostly forwards
         public event EventHandler? OnConnected;
@@ -204,6 +205,31 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
         private void Socket_ErrorReceived(Exception e, string? message)
         {
             OnError?.Invoke(this, message ?? e.Message);
+        }
+
+        /// <summary>
+        /// Marks the location as checked on the server
+        /// </summary>
+        /// <param name="locationIds"></param>
+        public void SendLocations(IReadOnlyCollection<long> locationIds)
+        {
+            Task.Run(() =>
+            {
+                if (_session == null || locationIds.Count == 0) return Task.CompletedTask;
+                return _session.Locations.CompleteLocationChecksAsync(locationIds.ToArray());
+            });
+        }
+
+        /// <summary>
+        /// Marks the game as completed
+        /// </summary>
+        public void SendGoal()
+        {
+            Task.Run(() =>
+            {
+                if (_session == null) return;
+                _session.SetGoalAchieved();
+            });
         }
     }
 }

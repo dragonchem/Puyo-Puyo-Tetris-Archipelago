@@ -56,6 +56,12 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views
                 if (connected)
                     _navigationService.ChangeView(ViewType.Tracker);
             }
+            catch (TaskCanceledException err)
+            {
+                _logger.LogError(err, "Failed to connect to Archipelago.");
+                MessageBox.Show("Connection timed out.", "Connection failed",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception err)
             {
                 _logger.LogError(err, "Failed to connect to Archipelago.");
