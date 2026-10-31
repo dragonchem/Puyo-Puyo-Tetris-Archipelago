@@ -83,7 +83,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection
                 GameName,
                 info.Slot,
                 ItemsHandlingFlags.AllItems, // Everything through events, even our local items
-                version: null,
+                version: Version.Parse("0.6.7"), // Seems to break on older versions
                 tags: null,
                 uuid: null,
                 password: string.IsNullOrEmpty(info.Password) ? null : info.Password,

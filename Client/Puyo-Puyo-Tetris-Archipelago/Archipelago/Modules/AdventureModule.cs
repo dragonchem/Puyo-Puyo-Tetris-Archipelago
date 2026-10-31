@@ -93,10 +93,10 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Modules
 
                 // First restore highest star known for stage
                 int amountOfStars = 0;
-                for (int s = 0; s < starIds.Length; s++)
+                for (int s = 1; s < starIds.Length; s++)
                 {
-                    if (_connection.CheckedLocations.Contains(_starLocationId[i][s]))
-                        amountOfStars = s;
+                    if (!_connection.CheckedLocations.Contains(starIds[s - 1])) break;
+                    amountOfStars = s;
                 }
 
                 if (amountOfStars > 0)
