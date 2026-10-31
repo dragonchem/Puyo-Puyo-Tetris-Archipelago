@@ -122,5 +122,24 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
 
             WriteStruct<ushort>(instance + RefreshPendingOffset, 1);
         }
+
+        /// <summary>
+        /// Clears the bits for a stage completely
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="unlocked"></param>
+        public void Wipe(int index, bool unlocked)
+        {
+            nint address = RecordAddr(index);
+            StageRecord existing = ReadStruct<StageRecord>(address);
+
+            uint tag = existing.Tag &
+                ~(StageMasks.GameCleared | StageMasks.Stars | StageMasks.Visited | StageMasks.ApUnlocked);
+
+            if (unlocked) tag |= StageMasks.ApUnlocked;
+
+            StageRecord record = new StageRecord { Tag = tag, Score = 0 };
+            WriteStruct(address, in record);
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         void SetApUnlocked(int index, bool unlocked);
         void SetStars(int index, int stars);
         void SetCursorIndex(ushort index);
+        void Wipe(int index, bool unlocked);
+        void RefreshMap();
     }
 }

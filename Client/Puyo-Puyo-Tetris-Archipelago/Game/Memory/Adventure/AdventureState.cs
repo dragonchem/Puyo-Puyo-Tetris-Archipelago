@@ -43,6 +43,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
         private void OnAttach(object? sender, EventArgs e)
         {
             _memoryModule.SetCursorIndex(0);
+            Reset();
         }
 
         /// <summary>
@@ -129,6 +130,19 @@ namespace Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure
             State = finalState;
 
             if (stageChanged) StateChanged?.Invoke(this, finalState);
+        }
+
+
+        public void Reset()
+        {
+            Array.Clear(_desiredStars, 0, _desiredStars.Length);
+            Array.Clear(_desiredUnlocked, 0, _desiredUnlocked.Length);
+            _desiredUnlocked[0] = true;
+
+            for (int i = 0; i < AdventureMemoryModule.StageCount; i++)
+                _memoryModule.Wipe(i, _desiredUnlocked[i]);
+
+            _memoryModule.RefreshMap();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Puyo_Puyo_Tetris_Archipelago.Archipelago.Connection;
 using Puyo_Puyo_Tetris_Archipelago.Archipelago.Translation;
+using Puyo_Puyo_Tetris_Archipelago.Game;
 using Puyo_Puyo_Tetris_Archipelago.Game.Memory.Adventure;
 using System;
 using System.Collections.Generic;
@@ -32,17 +33,24 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Modules
         private SlotData? _slotData;
         private bool _goalSent;
 
+        private readonly IGameBridge _game;
+        private bool _sessionReset = false;
+
         public AdventureModule(
             IArchipelagoConnection connection,
             AdventureState adventureState,
             ItemLocations itemLocations,
-            ILogger logger
+            ILogger logger,
+            IGameBridge game
         )
         {
             _connection = connection;
             _adventureState = adventureState;
             _itemLocations = itemLocations;
             _logger = logger;
+            _game = game;
+
+            _game.OnDetach += (_, _) => _sessionReset = false;
 
             _allStarLocationIds = new HashSet<long>(itemLocations.Locations.Values);
         }
@@ -60,6 +68,13 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Modules
             BuildIds(state);
             if (_unlockItemId == null) return;
             if (_starLocationId == null) return;
+
+            if (!_sessionReset)
+            {
+                _adventureState.Reset();
+                _sessionReset = true;
+                return;
+            }
 
             List<long> locationsToSend = new List<long>();
 
@@ -136,6 +151,7 @@ namespace Puyo_Puyo_Tetris_Archipelago.Archipelago.Modules
             _rawSlotData = raw;
             _slotData = raw == null ? null : new SlotData(raw);
             _goalSent = false;
+            _sessionReset = false;
         }
 
         /// <summary>
