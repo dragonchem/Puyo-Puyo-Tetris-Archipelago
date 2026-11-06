@@ -43,8 +43,9 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
     [DependencyProperty<Vector>("ShadowOffset")]
     public partial class PptShape : Decorator
     {
-        // Always gray, 50% opacity
-        private static readonly Brush ShadowBrush = MakeBrush("#66303030");
+        // Always gray, 40% transparent
+        private static readonly Brush ShadowBrush = MakeBrush("#303030");
+        private const double ShadowOpacity = 0.4;
 
         public PptShape()
         {
@@ -94,8 +95,11 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
                 double reach = InnerOutlineWidth + OuterOutlineWidth;
                 Pen? shadowPen = null;
                 if (reach > 0) shadowPen = new Pen(ShadowBrush, 2 * reach) { LineJoin = PenLineJoin.Miter, MiterLimit = 10 };
+                // Draw shadow as solid shape with opacity to prevent drawing over itself multiple times
+                drawingContext.PushOpacity(ShadowOpacity);
                 drawingContext.PushTransform(new TranslateTransform(ShadowOffset.X, ShadowOffset.Y));
                 drawingContext.DrawGeometry(ShadowBrush, shadowPen, quad);
+                drawingContext.Pop();
                 drawingContext.Pop();
             }
 
@@ -205,19 +209,30 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
         }
 
         /// <summary>
-        /// Size the shape wants: the quad plus the bands and the shadow reach
+        /// The quad's raw size from its points
         /// </summary>
-        private Size DesignSize()
+        private Size QuadExtent()
         {
             double maxX = Math.Max(Math.Max(Point1.X, Point2.X), Math.Max(Point3.X, Point4.X));
             double maxY = Math.Max(Math.Max(Point1.Y, Point2.Y), Math.Max(Point3.Y, Point4.Y));
-            double band = InnerOutlineWidth + OuterOutlineWidth;
-            return new Size(maxX + band + Math.Max(0, ShadowOffset.X),
-                            maxY + band + Math.Max(0, ShadowOffset.Y));
+            return new Size(maxX, maxY);
         }
 
         /// <summary>
-        /// Maps one corner into the render size, stretched to fit when Scalable
+        /// The size we want to be including outlines and shadow, only used when scalable is false
+        /// </summary>
+        private Size DesignSize()
+        {
+            Size quad = QuadExtent();
+            double band = InnerOutlineWidth + OuterOutlineWidth;
+            return new Size(
+                quad.Width + band + Math.Max(0, ShadowOffset.X),
+                quad.Height + band + Math.Max(0, ShadowOffset.Y)
+            );
+        }
+
+        /// <summary>
+        /// Maps a corner into the render size, stretched to fill when Scalable
         /// </summary>
         private Point ScaleCorner(Point corner, Size size)
         {
@@ -225,28 +240,28 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
             double scaleY = 1.0;
             if (Scalable && size.Width > 0 && size.Height > 0)
             {
-                Size design = DesignSize();
-                if (design.Width > 0 && design.Height > 0)
+                Size extent = QuadExtent();
+                if (extent.Width > 0 && extent.Height > 0)
                 {
-                    scaleX = size.Width / design.Width;
-                    scaleY = size.Height / design.Height;
+                    scaleX = size.Width / extent.Width;
+                    scaleY = size.Height / extent.Height;
                 }
             }
             return new Point(corner.X * scaleX, corner.Y * scaleY);
         }
 
         /// <summary>
-        /// Uniform scale from the design size to the render size, 1 when not Scalable
+        /// How much the quad got scaled up, 1 when not Scalable
         /// </summary>
         private double ContentScale(Size size)
         {
             if (!Scalable || size.Width <= 0 || size.Height <= 0) return 1.0;
-            Size design = DesignSize();
-            if (design.Width <= 0 || design.Height <= 0) return 1.0;
+            Size extent = QuadExtent();
+            if (extent.Width <= 0 || extent.Height <= 0) return 1.0;
 
-            // Geometric mean of the two axes, so round dots scale evenly
-            double scaleX = size.Width / design.Width;
-            double scaleY = size.Height / design.Height;
+            // Average the two axes so round dots stay round
+            double scaleX = size.Width / extent.Width;
+            double scaleY = size.Height / extent.Height;
             return Math.Sqrt(scaleX * scaleY);
         }
 

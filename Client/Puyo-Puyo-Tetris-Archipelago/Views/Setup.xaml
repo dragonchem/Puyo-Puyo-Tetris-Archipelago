@@ -11,51 +11,19 @@
 >
     <!--Main grid, layout header auto, body fill-->
     <Grid Name="MainGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="307*"/>
-            <ColumnDefinition Width="65*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <ppts:GridBackground Grid.RowSpan="3" Grid.ColumnSpan="3"/>
-
-        <!--Header grid, TODO-->
-        <Grid Grid.Row="0" Name="Header" Grid.RowSpan="2" Grid.ColumnSpan="3">
-            <Grid Margin="5" Name="HeaderContainer">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="4*"/>
-                </Grid.ColumnDefinitions>
-                <ppts:PptShape Scalable="True" ShowDots="True" Point1="0,0" Point2="690,0" Point3="580,130" Point4="0,150" DotAngle="0" GrowAngle="0" DotMinDiameter="5" DotMaxDiameter="5" DotSpacing="12.5" Margin="-5,-5,5,5">
-                    <ppts:PptShape.Fill>
-                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
-                            <GradientStop Color="#C98CF0" Offset="0"/>
-                            <GradientStop Color="#9E55E0" Offset="1"/>
-                        </LinearGradientBrush>
-                    </ppts:PptShape.Fill>
-                    <ppts:PptShape.DotBrush>
-                        <DrawingBrush>
-                            <DrawingBrush.Drawing>
-                                <GeometryDrawing Brush="#CE8ED6">
-                                    <GeometryDrawing.Geometry>
-                                        <EllipseGeometry RadiusX="1" RadiusY="1" Center="0,0"/>
-                                    </GeometryDrawing.Geometry>
-                                </GeometryDrawing>
-                            </DrawingBrush.Drawing>
-                        </DrawingBrush>
-                    </ppts:PptShape.DotBrush>
-                    <ppts:OutlinedText OutlineBrush="#5800B0" Scalable="True" Text="Connect" Margin="10" LetterOffset="4" LetterRotation="4" TextRotation="-8"></ppts:OutlinedText>
-                </ppts:PptShape>
-            </Grid>
-        </Grid>
+        <ppts:GridBackground Grid.RowSpan="4"/>
 
         <!--Body grid, centered stretch, content fill-->
-        <Grid Name="Body" Grid.Row="2" Grid.ColumnSpan="3">
+        <Grid Name="Body" Grid.Row="1" Grid.RowSpan="2">
+            <ppts:PptShape Grid.RowSpan="4" Grid.ColumnSpan="4" Scalable="True" Margin="-5,-5,-5,-5" Fill="White" InnerOutlineBrush="#646664" InnerOutlineWidth="5" OuterOutlineWidth="0" ShadowOffset="0,10" Point1="0,10" Point2="0,110">
+            </ppts:PptShape>
             <Grid Name="BodyContainer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -107,6 +75,39 @@
 
                 <!--Connect button, stretch horizontally, auto height-->
                 <Button Grid.Row="1" Click="ConnectButton_Click" Name="ConnectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="0,10" />
+            </Grid>
+        </Grid>
+
+
+
+        <!--Header grid, TODO-->
+        <Grid Grid.Row="0" Grid.RowSpan="2" Name="Header" Margin="0,0,0,0">
+            <Grid Name="HeaderContainer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ppts:PptShape Scalable="True" ShowDots="True" Point1="0,0" Point2="690,0" Point3="580,130" Point4="0,150" DotAngle="0" GrowAngle="0" DotMinDiameter="5" DotMaxDiameter="5" DotSpacing="12.5">
+                    <ppts:PptShape.Fill>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                            <GradientStop Color="#C98CF0" Offset="0"/>
+                            <GradientStop Color="#9E55E0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ppts:PptShape.Fill>
+                    <ppts:PptShape.DotBrush>
+                        <DrawingBrush>
+                            <DrawingBrush.Drawing>
+                                <GeometryDrawing Brush="#CE8ED6">
+                                    <GeometryDrawing.Geometry>
+                                        <EllipseGeometry RadiusX="1" RadiusY="1" Center="0,0"/>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </ppts:PptShape.DotBrush>
+                    <ppts:OutlinedText OutlineBrush="#5800B0" Scalable="True" Text="Connect" Margin="10" LetterOffset="4" LetterRotation="4" TextRotation="-8"></ppts:OutlinedText>
+                </ppts:PptShape>
             </Grid>
         </Grid>
     </Grid>
