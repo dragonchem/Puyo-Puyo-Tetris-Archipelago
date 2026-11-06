@@ -6,10 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
     xmlns:local="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views"
+    xmlns:ppt="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views.Controls"
+    xmlns:ppts="clr-namespace:Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes"
     mc:Ignorable="d" Height="450" Width="800"
-    Background="White"
 >
     <Grid>
+        <ppts:GridBackground Grid.RowSpan="2"/>
         <TextBlock Text="Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
     </Grid>
 </UserControl>

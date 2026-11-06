@@ -65,7 +65,7 @@ namespace Puyo_Puyo_Tetris_Archipelago
         private void OnElevationRequired(object? sender, EventArgs e)
         {
             // Show confirm to user
-            var choice = MessageBox.Show(
+            MessageBoxResult choice = MessageBox.Show(
                 "Your game is running in Administrator mode, this client is not. Would you like to re-launch this client in Administrator mode? If no, you must launch the game in user mode.",
                 "Game is running as Administrator",
                 MessageBoxButton.YesNo,

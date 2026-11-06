@@ -8,6 +8,8 @@
         Title="MainWindow"
         Height="560" Width="1120"
         Icon="./Resources/icon.ico"
+        MinHeight="300"
+        MinWidth="500"
     >
     <!--MinHeight="560" MinWidth="1120">-->
     <Grid Name="ViewRoot">
