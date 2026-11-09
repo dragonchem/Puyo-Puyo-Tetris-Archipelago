@@ -45,6 +45,17 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
             BackgroundEndColor = (Color)ColorConverter.ConvertFromString("#EFEFF3");
         }
 
+        // Rerender if property changes
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property.OwnerType == typeof(DotBackground))
+            {
+                InvalidateMeasure();
+                InvalidateVisual();
+            }
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             // Grab the render size

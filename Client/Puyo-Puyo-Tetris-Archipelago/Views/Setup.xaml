@@ -16,13 +16,40 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <ppts:GridBackground Grid.RowSpan="4"/>
+        <ppts:GridBackground Grid.RowSpan="6"/>
+
+        <Grid Grid.Row="4" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ppts:PptShape Point1="5,0" Point2="100,0" Point3="100,100" Point4="0,100" Grid.Column="1" Scalable="True" Fill="#0071BC" InnerOutlineBrush="White" OuterOutlineBrush="#BABABA" OuterOutlineWidth="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ppts:OutlinedText OutlineBrush="#135784" Scalable="True" Text="Game Status:" Margin="10" LetterOffset="4" LetterRotation="4" TextRotation="-4" Grid.Column="0" Grid.Row="2" Grid.RowSpan="2"></ppts:OutlinedText>
+                    <ppts:OutlinedText OutlineBrush="#821313" Scalable="True" Text="Not Attached" Margin="10" LetterOffset="4" LetterRotation="4" TextRotation="-4" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" x:Name="AttachedText"></ppts:OutlinedText>
+                </Grid>
+            </ppts:PptShape>
+        </Grid>
 
         <!--Body grid, centered stretch, content fill-->
-        <Grid Name="Body" Grid.Row="1" Grid.RowSpan="2">
-            <ppts:PptShape Grid.RowSpan="4" Grid.ColumnSpan="4" Scalable="True" Margin="-5,-5,-5,-5" Fill="White" InnerOutlineBrush="#646664" InnerOutlineWidth="5" OuterOutlineWidth="0" ShadowOffset="0,10" Point1="0,10" Point2="0,110">
+        <Grid Name="Body" Grid.Row="1" Grid.RowSpan="4">
+            <ppts:PptShape Grid.RowSpan="4" Grid.ColumnSpan="4" Scalable="True" Margin="-5,-5,-5,-5" Fill="White" InnerOutlineBrush="#646664" InnerOutlineWidth="5" OuterOutlineWidth="0" ShadowOffset="0,8" Point1="0,10" Point2="0,110">
             </ppts:PptShape>
             <Grid Name="BodyContainer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="20">
                 <Grid.RowDefinitions>
@@ -88,7 +115,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ppts:PptShape Scalable="True" ShowDots="True" Point1="0,0" Point2="690,0" Point3="580,130" Point4="0,150" DotAngle="0" GrowAngle="0" DotMinDiameter="5" DotMaxDiameter="5" DotSpacing="12.5">
+                <ppts:PptShape Scalable="True" ShowDots="True" Point1="0,0" Point2="690,0" Point3="580,130" Point4="0,150" DotAngle="0" GrowAngle="0" DotMinDiameter="5" DotMaxDiameter="5" DotSpacing="10" InnerOutlineBrush="#5800B0" OuterOutlineBrush="White" OuterOutlineWidth="5" InnerOutlineWidth="5">
                     <ppts:PptShape.Fill>
                         <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
                             <GradientStop Color="#C98CF0" Offset="0"/>
@@ -98,7 +125,7 @@
                     <ppts:PptShape.DotBrush>
                         <DrawingBrush>
                             <DrawingBrush.Drawing>
-                                <GeometryDrawing Brush="#CE8ED6">
+                                <GeometryDrawing Brush="#80EDDCB6">
                                     <GeometryDrawing.Geometry>
                                         <EllipseGeometry RadiusX="1" RadiusY="1" Center="0,0"/>
                                     </GeometryDrawing.Geometry>

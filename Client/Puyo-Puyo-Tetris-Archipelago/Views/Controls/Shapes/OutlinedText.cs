@@ -54,6 +54,17 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
             FontStretch = FontStretches.Normal;
         }
 
+        // Rerender if property changes
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property.OwnerType == typeof(OutlinedText))
+            {
+                InvalidateMeasure();
+                InvalidateVisual();
+            }
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             // Build the text

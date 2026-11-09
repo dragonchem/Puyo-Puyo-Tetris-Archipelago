@@ -58,14 +58,19 @@ namespace Puyo_Puyo_Tetris_Archipelago.Views.Controls.Shapes
             Point3 = new Point(100, 100);
             Point4 = new Point(100, 0);
 
-            // Default color values
-            Fill = MakeGradient("#C98CF0", "#9E55E0");
-            DotBrush = MakeBrush("#40FFFFFF");
-            InnerOutlineBrush = MakeBrush("#5B1FB0");
-            OuterOutlineBrush = Brushes.White;
-
             // Default shadow offset
             ShadowOffset = new Vector(7, 9);
+        }
+
+        // Rerender if property changes
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property.OwnerType == typeof(PptShape))
+            {
+                InvalidateMeasure();
+                InvalidateVisual();
+            }
         }
 
         protected override void OnRender(DrawingContext drawingContext)
